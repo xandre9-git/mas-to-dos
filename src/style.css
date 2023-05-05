@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  font-family: "Oswald", Courier, monospace;
+}
+
+@font-face {
+  font-family: "Oswald";
+  src: url("./fonts/Oswald-Regular.ttf"), format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+#top-bar {
+  height: 2.5rem;
+  line-height: 2.5rem;
+  background-color: rgb(161, 9, 9);
+  color: white;
+
+
+}

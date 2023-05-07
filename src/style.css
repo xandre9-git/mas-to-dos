@@ -18,9 +18,9 @@ h1 {
 #content {
   display: grid;
   grid-template-areas:
-    "a a a a"
-    "b c c c"
-    "b c c c";
+    "a a a a a a "
+    "b c c c c c"
+    "b c c c c c";
 }
 
 #top-bar {
@@ -31,7 +31,7 @@ h1 {
 }
 
 #left-side-bar {
-  grid-area:b;
+  grid-area: b;
   background-color: coral;
   height: 90vh;
 }
@@ -40,4 +40,10 @@ h1 {
   grid-area: c;
   background-color: rgb(0, 188, 240);
   height: 90vh;
+}
+
+.add-projects {
+  list-style-type: none;
+  color: white;
+  font-size: 1.5em;
 }

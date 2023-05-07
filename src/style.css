@@ -57,4 +57,11 @@ h1 {
   color: white;
   padding-left: 1.5%;
   margin-top: 1%;
+  margin-bottom: 2.5%;
+}
+
+.to-do-boxes {
+  background-color: #ffff88;
+  height: 75vh;
+  margin: 2%;
 }

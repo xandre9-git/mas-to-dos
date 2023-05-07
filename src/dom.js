@@ -21,10 +21,35 @@ leftSideBar.id = "left-side-bar";
 const todoBoardsContainer = document.createElement("div");
 todoBoardsContainer.id = "to-dos-container";
 
+// project section (goes in left side bar)
+const projectsContainer = document.createElement("div");
+projectsContainer.id = "projects-container";
+leftSideBar.appendChild(projectsContainer);
+
+// projects list
+const projectsList = document.createElement("ul");
+projectsList.id = "projects-ul";
+projectsContainer.appendChild(projectsList);
+
+// my tasks (default project)
+const myTasks = document.createElement("li");
+myTasks.className = "add-projects";
+myTasks.textContent = "My Tasks";
+projectsList.appendChild(myTasks);
+
+// add project button
+const addProjectButton = document.createElement("li");
+addProjectButton.className = "add-projects";
+addProjectButton.textContent = "+ Add Project";
+projectsList.appendChild(addProjectButton);
+
+
 // dom appends
 body.appendChild(topBar);
 body.appendChild(leftSideBar);
 body.appendChild(todoBoardsContainer);
+
+
 
 
 export { body };

@@ -15,11 +15,29 @@ h1 {
   font-size: 2rem;
 }
 
+#content {
+  display: grid;
+  grid-template-areas:
+    "a a a a"
+    "b c c c"
+    "b c c c";
+}
+
 #top-bar {
-  height: 2.5rem;
-  line-height: 2.5rem;
-  background-color: rgb(161, 9, 9);
+  grid-area: a;
+  background-color: rgb(139, 72, 189);
   color: white;
+  height: 10vh;
+}
 
+#left-side-bar {
+  grid-area:b;
+  background-color: coral;
+  height: 90vh;
+}
 
+#to-dos-container {
+  grid-area: c;
+  background-color: rgb(0, 188, 240);
+  height: 90vh;
 }

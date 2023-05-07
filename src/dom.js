@@ -10,16 +10,12 @@ topBar.id = "top-bar";
 // top bar title
 const topBarTitle = document.createElement("h1");
 topBarTitle.textContent = "Mas To Do's";
-topBarTitle.id = "title-bar"
+topBarTitle.id = "title-bar";
 topBar.appendChild(topBarTitle);
 
 // left side bar
 const leftSideBar = document.createElement("div");
 leftSideBar.id = "left-side-bar";
-
-// to do board
-const todoBoardsContainer = document.createElement("div");
-todoBoardsContainer.id = "to-dos-container";
 
 // project section (goes in left side bar)
 const projectsContainer = document.createElement("div");
@@ -43,13 +39,24 @@ addProjectButton.className = "add-projects";
 addProjectButton.textContent = "+ Add Project";
 projectsList.appendChild(addProjectButton);
 
+// to do board container
+const todoBoardsContainer = document.createElement("div");
+todoBoardsContainer.id = "to-dos-container";
+
+// current tasks container
+const currentTasksContainer = document.createElement("div");
+currentTasksContainer.className = "current-tasks";
+todoBoardsContainer.appendChild(currentTasksContainer);
+
+// current tasks title
+const currentTasksTitle = document.createElement("h2");
+currentTasksTitle.className = "to-dos-title";
+currentTasksTitle.textContent = "Tasks";
+currentTasksContainer.appendChild(currentTasksTitle);
 
 // dom appends
 body.appendChild(topBar);
 body.appendChild(leftSideBar);
 body.appendChild(todoBoardsContainer);
-
-
-
 
 export { body };

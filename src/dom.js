@@ -45,7 +45,7 @@ todoBoardsContainer.id = "to-dos-container";
 
 // current tasks container
 const currentTasksContainer = document.createElement("div");
-currentTasksContainer.className = "current-tasks";
+currentTasksContainer.className = "current-tasks-container";
 todoBoardsContainer.appendChild(currentTasksContainer);
 
 // current tasks title
@@ -55,11 +55,29 @@ currentTasksTitle.textContent = "Tasks";
 currentTasksContainer.appendChild(currentTasksTitle);
 
 // current tasklist
-const currentTasklist = document.createElement("div");
-currentTasklist.className = "to-do-boxes";
-currentTasksContainer.appendChild(currentTasklist);
+const currentTaskList = document.createElement("div");
+currentTaskList.className = "current-task-list";
+currentTasksContainer.appendChild(currentTaskList);
 
-// dom body appends
+// add tasks container
+const addTaskContainer = document.createElement("div");
+addTaskContainer.id = "add-taskbar";
+currentTaskList.appendChild(addTaskContainer);
+
+// add tasks input bar
+const addTasksInput = document.createElement("input");
+addTasksInput.id = "task-input-bar";
+addTasksInput.placeholder = "Add a task";
+addTaskContainer.appendChild(addTasksInput);
+
+// add tasks submit button
+const addTaskBtn = document.createElement("button");
+addTaskBtn.textContent = "+";
+addTaskBtn.type = "submit";
+addTaskBtn.id = "add-task-btn";
+addTaskContainer.appendChild(addTaskBtn);
+
+// dom #content appends
 body.appendChild(topBar);
 body.appendChild(leftSideBar);
 body.appendChild(todoBoardsContainer);

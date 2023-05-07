@@ -13,6 +13,8 @@ topBarTitle.textContent = "Mas To Do's";
 topBarTitle.id = "title-bar";
 topBar.appendChild(topBarTitle);
 
+// PROJECTS
+
 // left side bar
 const leftSideBar = document.createElement("div");
 leftSideBar.id = "left-side-bar";
@@ -38,6 +40,8 @@ const addProjectButton = document.createElement("li");
 addProjectButton.className = "add-projects";
 addProjectButton.textContent = "+ Add Project";
 projectsList.appendChild(addProjectButton);
+
+// TO DOS
 
 // to do board container
 const todoBoardsContainer = document.createElement("div");

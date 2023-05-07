@@ -7,10 +7,12 @@ const body = document.getElementById("content");
 const topBar = document.createElement("div");
 topBar.id = "top-bar";
 
+// top bar title
 const topBarTitle = document.createElement("h1");
 topBarTitle.textContent = "Mas To Do's";
-
 topBar.appendChild(topBarTitle);
+
+// dom appends
 body.appendChild(topBar);
 
 

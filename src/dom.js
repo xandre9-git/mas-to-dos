@@ -54,7 +54,12 @@ currentTasksTitle.className = "to-dos-title";
 currentTasksTitle.textContent = "Tasks";
 currentTasksContainer.appendChild(currentTasksTitle);
 
-// dom appends
+// current tasklist
+const currentTasklist = document.createElement("div");
+currentTasklist.className = "to-do-boxes";
+currentTasksContainer.appendChild(currentTasklist);
+
+// dom body appends
 body.appendChild(topBar);
 body.appendChild(leftSideBar);
 body.appendChild(todoBoardsContainer);

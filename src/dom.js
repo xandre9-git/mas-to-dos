@@ -41,6 +41,26 @@ addProjectButton.className = "add-projects";
 addProjectButton.textContent = "+ Add Project";
 projectsList.appendChild(addProjectButton);
 
+// project buttons container
+const projectBtns = document.createElement("div");
+projectBtns.id = "project-btns-container";
+
+// edit project name button
+const editProjectBtn = document.createElement("div");
+editProjectBtn.className = "project-btns filter-white";
+editProjectBtn.id = "edit-btn";
+editProjectBtn.title = "Edit";
+
+// delete project button
+const deleteProjectBtn = document.createElement("div");
+deleteProjectBtn.className = "project-btns filter-white";
+deleteProjectBtn.id ="del-btn";
+deleteProjectBtn.title = "Delete";
+
+// project button container appendages
+projectBtns.appendChild(editProjectBtn);
+projectBtns.appendChild(deleteProjectBtn);
+
 // TO DOS
 
 // to do board container
@@ -50,12 +70,12 @@ todoBoardsContainer.style.display = "none";
 
 // current tasks container
 const currentTasksContainer = document.createElement("div");
-currentTasksContainer.className = "current-tasks-container";
+currentTasksContainer.id = "current-tasks-container";
 todoBoardsContainer.appendChild(currentTasksContainer);
 
 // current tasks title
 const currentTasksTitle = document.createElement("h2");
-currentTasksTitle.className = "to-dos-title";
+currentTasksTitle.className = "active-pane-title";
 currentTasksTitle.textContent = "Tasks";
 currentTasksContainer.appendChild(currentTasksTitle);
 
@@ -102,9 +122,16 @@ detailsContainer.id = "details-container";
 
 // details title
 const detailsTitle = document.createElement("h2");
-detailsTitle.className = "to-dos-title";
+detailsTitle.className = "active-pane-title";
 detailsTitle.textContent = "Details";
 detailsContainer.appendChild(detailsTitle);
+
+// details pane
+const details = document.createElement("div");
+details.id = "details";
+detailsContainer.appendChild(details);
+
+
 
 // dom #content appends
 body.appendChild(topBar);

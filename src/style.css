@@ -47,6 +47,12 @@ h1 {
   height: 90vh;
 }
 
+#details-container {
+  grid-area: c;
+  background-color: rgb(20, 165, 173);
+  height: 90vh;
+}
+
 #add-taskbar {
   display: flex;
   justify-content: space-evenly;

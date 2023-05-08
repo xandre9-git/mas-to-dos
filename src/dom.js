@@ -59,14 +59,14 @@ currentTasksTitle.textContent = "Tasks";
 currentTasksContainer.appendChild(currentTasksTitle);
 
 // current tasklist
-const currentTaskList = document.createElement("div");
-currentTaskList.className = "current-task-list";
-currentTasksContainer.appendChild(currentTaskList);
+const currentTaskListContainer = document.createElement("div");
+currentTaskListContainer.className = "current-task-list-container";
+currentTasksContainer.appendChild(currentTaskListContainer);
 
 // add tasks container
 const addTaskContainer = document.createElement("div");
 addTaskContainer.id = "add-taskbar";
-currentTaskList.appendChild(addTaskContainer);
+currentTaskListContainer.appendChild(addTaskContainer);
 
 // add tasks input bar
 const addTasksInput = document.createElement("input");
@@ -80,6 +80,15 @@ addTaskBtn.textContent = "+";
 addTaskBtn.type = "submit";
 addTaskBtn.id = "add-task-btn";
 addTaskContainer.appendChild(addTaskBtn);
+
+// current tasks unordered list
+const currentTaskList = document.createElement("div");
+currentTaskList.id = "current-tasks-ul";
+
+// current tasks list item
+const addTaskListItem = document.createElement("li");
+addTaskListItem.className = "add-task-li";
+
 
 // dom #content appends
 body.appendChild(topBar);

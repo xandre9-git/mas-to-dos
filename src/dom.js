@@ -46,6 +46,7 @@ projectsList.appendChild(addProjectButton);
 // to do board container
 const todoBoardsContainer = document.createElement("div");
 todoBoardsContainer.id = "to-dos-container";
+todoBoardsContainer.style.display = "none";
 
 // current tasks container
 const currentTasksContainer = document.createElement("div");
@@ -78,21 +79,37 @@ addTaskContainer.appendChild(addTasksInput);
 const addTaskBtn = document.createElement("button");
 addTaskBtn.textContent = "+";
 addTaskBtn.type = "submit";
+// note: add styling
 addTaskBtn.id = "add-task-btn";
 addTaskContainer.appendChild(addTaskBtn);
 
 // current tasks unordered list
 const currentTaskList = document.createElement("div");
+// note: add styling
 currentTaskList.id = "current-tasks-ul";
 
 // current tasks list item
 const addTaskListItem = document.createElement("li");
+// note: add styling
 addTaskListItem.className = "add-task-li";
 
+// DETAILS
+
+// details board container
+const detailsContainer = document.createElement("div");
+// note: add styling
+detailsContainer.id = "details-container";
+
+// details title
+const detailsTitle = document.createElement("h2");
+detailsTitle.className = "to-dos-title";
+detailsTitle.textContent = "Details";
+detailsContainer.appendChild(detailsTitle);
 
 // dom #content appends
 body.appendChild(topBar);
 body.appendChild(leftSideBar);
 body.appendChild(todoBoardsContainer);
+body.appendChild(detailsContainer);
 
 export { body };

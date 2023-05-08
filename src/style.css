@@ -47,10 +47,10 @@ h1 {
   height: 90vh;
 }
 
-#details-container {
-  grid-area: c;
-  background-color: rgb(20, 165, 173);
-  height: 90vh;
+#current-task-list-container {
+  background-color: #ffff88;
+  height: 75vh;
+  margin: 2%;
 }
 
 #add-taskbar {
@@ -63,21 +63,38 @@ h1 {
   width: 90%;
 }
 
+#details-container {
+  grid-area: c;
+  background-color: rgb(20, 165, 173);
+  height: 90vh;
+}
+
+#details {
+  background-color: paleturquoise;
+  height: 75vh;
+  margin: 2%;
+}
+
 .add-projects {
   list-style-type: none;
   color: white;
   font-size: 1.5em;
 }
 
-.to-dos-title {
+.active-pane-title {
   color: white;
   padding-left: 1.5%;
   margin-top: 1%;
   margin-bottom: 2.5%;
 }
 
-.current-task-list-container {
-  background-color: #ffff88;
-  height: 75vh;
-  margin: 2%;
+.project-btns {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.filter-white {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(125deg)
+    brightness(100%) contrast(102%);
 }

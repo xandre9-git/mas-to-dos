@@ -75,6 +75,20 @@ h1 {
   margin: 2%;
 }
 
+#details h3 {
+  margin: 0.5%;
+  color: hotpink;
+}
+
+#details input, select, textarea {
+  margin: 0.5%;
+}
+
+#details textarea {
+  height: 125px;
+  width: 375px;
+}
+
 .add-projects {
   list-style-type: none;
   color: white;

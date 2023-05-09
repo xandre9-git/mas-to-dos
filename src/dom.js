@@ -54,7 +54,7 @@ editProjectBtn.title = "Edit";
 // delete project button
 const deleteProjectBtn = document.createElement("div");
 deleteProjectBtn.className = "project-btns filter-white";
-deleteProjectBtn.id ="del-btn";
+deleteProjectBtn.id = "del-btn";
 deleteProjectBtn.title = "Delete";
 
 // project button container appendages
@@ -131,7 +131,100 @@ const details = document.createElement("div");
 details.id = "details";
 detailsContainer.appendChild(details);
 
+// details project selector container
+const projectSelectorContainer = document.createElement("div");
+projectSelectorContainer.id = "project-selector";
+details.appendChild(projectSelectorContainer);
 
+// details project selector title
+const selectProjectTitle = document.createElement("h3");
+selectProjectTitle.textContent = "Project";
+projectSelectorContainer.appendChild(selectProjectTitle);
+
+// details project selector
+const selectProject = document.createElement("select");
+projectSelectorContainer.appendChild(selectProject);
+
+// details project selector default selection
+const selectNone = document.createElement("option");
+selectNone.text = "None";
+selectProject.appendChild(selectNone);
+
+// details date due container
+const dateDueContainer = document.createElement("div");
+dateDueContainer.id = "date-due";
+details.appendChild(dateDueContainer);
+
+// details date due selector title
+const dateDueTitle = document.createElement("h3");
+dateDueTitle.textContent = "Date Due";
+dateDueContainer.appendChild(dateDueTitle);
+
+// details date due selector
+const dateDueSelector = document.createElement("input");
+dateDueSelector.type = "date";
+dateDueContainer.appendChild(dateDueSelector);
+
+// details time due container
+const timeDueContainer = document.createElement("div");
+timeDueContainer.id = "time-due";
+details.appendChild(timeDueContainer);
+
+// details time due selector title
+const timeDueTitle = document.createElement("h3");
+timeDueTitle.textContent = "Time Due";
+timeDueContainer.appendChild(timeDueTitle);
+
+// details time due selector
+const timeDueSelector = document.createElement("input");
+timeDueSelector.type = "time";
+timeDueContainer.appendChild(timeDueSelector);
+
+// task priority container
+const taskPriorityContainer = document.createElement("div");
+taskPriorityContainer.id = "task-priority";
+details.appendChild(taskPriorityContainer);
+
+// task priority selector title
+const taskPriorityTitle = document.createElement("h3");
+taskPriorityTitle.textContent = "Task Priority";
+taskPriorityContainer.appendChild(taskPriorityTitle);
+
+// task priority selector
+const taskPrioritySelector = document.createElement("select");
+taskPriorityContainer.appendChild(taskPrioritySelector);
+
+const noPriority = document.createElement("option");
+noPriority.text = "None";
+taskPrioritySelector.appendChild(noPriority);
+
+const lowPriority = document.createElement("option");
+lowPriority.text = "Low";
+taskPrioritySelector.appendChild(lowPriority);
+
+const medPriority = document.createElement("option");
+medPriority.text = "Medium";
+taskPrioritySelector.appendChild(medPriority);
+
+const highPriority = document.createElement("option");
+highPriority.text = "High";
+taskPrioritySelector.appendChild(highPriority);
+
+// details description container
+const taskDescriptionContainer = document.createElement("div");
+taskDescriptionContainer.id = "task-description";
+details.appendChild(taskDescriptionContainer);
+
+// details description title
+const taskDescriptionTitle = document.createElement("h3");
+taskDescriptionTitle.textContent = "Description";
+taskDescriptionContainer.appendChild(taskDescriptionTitle);
+
+// details description textarea
+const taskDescription = document.createElement("textarea");
+taskDescription.id = "task-description";
+taskDescription.placeholder = "Enter description of task."
+taskDescriptionContainer.appendChild(taskDescription);
 
 // dom #content appends
 body.appendChild(topBar);

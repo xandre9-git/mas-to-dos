@@ -253,7 +253,6 @@ detailsDeleteBtn.id = "delete-btn";
 detailsDeleteBtn.title = "Delete Task";
 detailsBtnContainer.appendChild(detailsDeleteBtn);
 
-
 // dom #content appends
 body.appendChild(topBar);
 body.appendChild(leftSideBar);

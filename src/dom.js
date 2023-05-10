@@ -1,4 +1,6 @@
-// DOM elements
+// --- DOM ELEMENTS ---
+import { projectsAndTasks } from "./data";
+import { projectCreator } from "./functions";
 
 // main container for the app
 const body = document.getElementById("content");
@@ -32,13 +34,14 @@ projectsContainer.appendChild(projectsList);
 // my tasks (default project)
 const myTasks = document.createElement("li");
 myTasks.className = "add-projects";
-myTasks.textContent = "My Tasks";
+myTasks.textContent = projectsAndTasks[0].projectName;
 projectsList.appendChild(myTasks);
 
 // add project button
 const addProjectButton = document.createElement("li");
 addProjectButton.className = "add-projects";
 addProjectButton.textContent = "+ Add Project";
+addProjectButton.addEventListener("click", projectCreator);
 projectsList.appendChild(addProjectButton);
 
 // project buttons container

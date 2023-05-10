@@ -145,7 +145,7 @@ projectSelectorContainer.appendChild(selectProjectTitle);
 const selectProject = document.createElement("select");
 projectSelectorContainer.appendChild(selectProject);
 
-// details project selector default selection
+// details project selector default option
 const selectNone = document.createElement("option");
 selectNone.text = "None";
 selectProject.appendChild(selectNone);
@@ -160,7 +160,7 @@ const dateDueTitle = document.createElement("h3");
 dateDueTitle.textContent = "Date Due";
 dateDueContainer.appendChild(dateDueTitle);
 
-// details date due selector
+// details date due input
 const dateDueSelector = document.createElement("input");
 dateDueSelector.type = "date";
 dateDueContainer.appendChild(dateDueSelector);
@@ -175,7 +175,7 @@ const timeDueTitle = document.createElement("h3");
 timeDueTitle.textContent = "Time Due";
 timeDueContainer.appendChild(timeDueTitle);
 
-// details time due selector
+// details time due input
 const timeDueSelector = document.createElement("input");
 timeDueSelector.type = "time";
 timeDueContainer.appendChild(timeDueSelector);
@@ -185,7 +185,7 @@ const taskPriorityContainer = document.createElement("div");
 taskPriorityContainer.id = "task-priority";
 details.appendChild(taskPriorityContainer);
 
-// task priority selector title
+// task priority title
 const taskPriorityTitle = document.createElement("h3");
 taskPriorityTitle.textContent = "Task Priority";
 taskPriorityContainer.appendChild(taskPriorityTitle);
@@ -194,18 +194,22 @@ taskPriorityContainer.appendChild(taskPriorityTitle);
 const taskPrioritySelector = document.createElement("select");
 taskPriorityContainer.appendChild(taskPrioritySelector);
 
+// none priority option
 const noPriority = document.createElement("option");
 noPriority.text = "None";
 taskPrioritySelector.appendChild(noPriority);
 
+// low priority option
 const lowPriority = document.createElement("option");
 lowPriority.text = "Low";
 taskPrioritySelector.appendChild(lowPriority);
 
+// medium priority option
 const medPriority = document.createElement("option");
 medPriority.text = "Medium";
 taskPrioritySelector.appendChild(medPriority);
 
+// high priority option
 const highPriority = document.createElement("option");
 highPriority.text = "High";
 taskPrioritySelector.appendChild(highPriority);
@@ -223,8 +227,32 @@ taskDescriptionContainer.appendChild(taskDescriptionTitle);
 // details description textarea
 const taskDescription = document.createElement("textarea");
 taskDescription.id = "task-description";
-taskDescription.placeholder = "Enter description of task."
+taskDescription.placeholder = "Enter description of task.";
 taskDescriptionContainer.appendChild(taskDescription);
+
+// details buttons container
+const detailsBtnContainer = document.createElement("div");
+detailsBtnContainer.id = "details-btn-container";
+details.appendChild(detailsBtnContainer);
+
+// details save btn
+const detailsSaveBtn = document.createElement("div");
+detailsSaveBtn.id = "save-btn";
+detailsSaveBtn.title = "Save Changes";
+detailsBtnContainer.appendChild(detailsSaveBtn);
+
+// details cancel btn
+const detailsCancelBtn = document.createElement("div");
+detailsCancelBtn.id = "cancel-btn";
+detailsCancelBtn.title = "Cancel Changes";
+detailsBtnContainer.appendChild(detailsCancelBtn);
+
+// details delete btn
+const detailsDeleteBtn = document.createElement("div");
+detailsDeleteBtn.id = "delete-btn";
+detailsDeleteBtn.title = "Delete Task";
+detailsBtnContainer.appendChild(detailsDeleteBtn);
+
 
 // dom #content appends
 body.appendChild(topBar);

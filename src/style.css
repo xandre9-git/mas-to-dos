@@ -89,6 +89,30 @@ h1 {
   width: 375px;
 }
 
+#details-btn-container {
+  display: flex;
+  margin-left: 0.5%;
+}
+
+#save-btn {
+  height: 24px;
+  width: 24px;
+  background-image: url("./images/save.svg");
+}
+
+#cancel-btn {
+  height: 24px;
+  width: 24px;
+  background-image: url("./images/cancel.svg");
+}
+
+#delete-btn {
+  height: 24px;
+  width: 24px;
+  background-image: url("./images/delete.svg");
+  background-size: 100% 100%;
+}
+
 .add-projects {
   list-style-type: none;
   color: white;

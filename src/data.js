@@ -2,7 +2,7 @@
 
 // PROJECTs AND TASKS STORAGE
 const projectsAndTasks = [
-  { projectName: "My Tasks", currentTasks: [], completedTasks: [] },
+  { projectName: "My Tasks", currentTasks: [], completedTasks: [] }, 
 ];
 
 // export

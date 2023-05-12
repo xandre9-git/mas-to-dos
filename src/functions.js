@@ -25,35 +25,63 @@ function projectCreator() {
   }
 }
 
-function displayProjects(database, parent) {
+function displayProjects(database, parentNode) {
   for (let i = 0; i < database.length; i++) {
     const addProject = document.createElement("li");
     addProject.className = "add-projects";
     addProject.textContent = database[i].projectName;
-    parent.appendChild(addProject);
+    parentNode.appendChild(addProject);
   }
 }
 
-function taskCreator(task, database) {
-  // add tasks to selected project
-  database.push(task);
+function activeProject(param){
+  let activeProject = "My Tasks";
+  if (param === activeProject){
+    console.log('Already set at "My Tasks"');
+    return
+  } else {
+    activeProject = param;
+    console.log(`activeProject is now: ${activeProject}`);
+  }
+}
 
-  const taskContainer = document.createElement("div");
-  taskContainer.className = "task-list-item-container";
 
-  const listItem = document.createElement("li");
-  listItem.className = "task-list-item";
-  listItem.textContent = task;
-  taskContainer.appendChild(listItem);
+function taskCreator(task, database){
+  // find out which database task is to be created in based on project selected, if no project name is clicked, set to 'My Tasks' as default
 
-  const editBtn = document.createElement("div");
-  editBtn.className = "task-edit-btn";
-  taskContainer.appendChild(editBtn);
+  let newTask = {
+    id: newId,
+    title: title,
+    projectName: database[projectIndex].projectName,
+    dateDue: new Date(),
+    timeDue: "",
+    priority: "None",
+    desc: "",
+  };
+}
 
-  const completeBtn = document.createElement("div");
-  completeBtn.className = "task-complete-btn";
-  taskContainer.appendChild(completeBtn);
+function displayTasks(database) {
+
+  for (let i = 0; i < database.length; i++) {
+    const taskContainer = document.createElement("div");
+    taskContainer.className = "task-list-item-container";
+  
+    const listItem = document.createElement("li");
+    listItem.className = "task-list-item";
+    listItem.textContent = database[i].currentTasks;
+    taskContainer.appendChild(listItem);
+  
+    const editBtn = document.createElement("div");
+    editBtn.className = "task-edit-btn";
+    taskContainer.appendChild(editBtn);
+  
+    const completeBtn = document.createElement("div");
+    completeBtn.className = "task-complete-btn";
+    taskContainer.appendChild(completeBtn);
+  }
+  
 }
 
 export { projectCreator };
-export { displayProjects }
+export { displayProjects };
+export { activeProject };

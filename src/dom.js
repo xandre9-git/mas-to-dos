@@ -1,6 +1,7 @@
 // --- DOM ELEMENTS ---
 import { projectsAndTasks } from "./data";
 import { projectCreator } from "./functions";
+import { displayProjects } from "./functions";
 
 // main container for the app
 const body = document.getElementById("content");
@@ -31,11 +32,8 @@ const projectsList = document.createElement("ul");
 projectsList.id = "projects-ul";
 projectsContainer.appendChild(projectsList);
 
-// my tasks (default project)
-const myTasks = document.createElement("li");
-myTasks.className = "add-projects";
-myTasks.textContent = projectsAndTasks[0].projectName;
-projectsList.appendChild(myTasks);
+// function to display projects on the dom
+displayProjects(projectsAndTasks, projectsList);
 
 // add project button
 const addProjectButton = document.createElement("li");

@@ -2,6 +2,7 @@
 import { projectsAndTasks } from "./data";
 import { projectCreator } from "./functions";
 import { displayProjects } from "./functions";
+import { activeProject } from "./functions";
 
 // main container for the app
 const body = document.getElementById("content");
@@ -35,12 +36,20 @@ projectsContainer.appendChild(projectsList);
 // function to display projects on the dom
 displayProjects(projectsAndTasks, projectsList);
 
+// function to change active selected project
+projectsList.addEventListener("click", function(event){
+  console.log(`event.target.textContent = ${event.target.textContent}`);
+  // get text content value of element that was clicked
+  activeProject(event.target.textContent)
+})
+
 // add project button
 const addProjectButton = document.createElement("li");
 addProjectButton.className = "add-projects";
 addProjectButton.textContent = "+ Add Project";
 addProjectButton.addEventListener("click", projectCreator);
 projectsList.appendChild(addProjectButton);
+
 
 // project buttons container
 const projectBtns = document.createElement("div");

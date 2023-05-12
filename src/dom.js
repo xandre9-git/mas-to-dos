@@ -69,7 +69,7 @@ projectBtns.appendChild(deleteProjectBtn);
 // to do board container
 const todoBoardsContainer = document.createElement("div");
 todoBoardsContainer.id = "to-dos-container";
-todoBoardsContainer.style.display = "none";
+todoBoardsContainer.style.display = "block";
 
 // current tasks container
 const currentTasksContainer = document.createElement("div");
@@ -84,7 +84,7 @@ currentTasksContainer.appendChild(currentTasksTitle);
 
 // current tasklist
 const currentTaskListContainer = document.createElement("div");
-currentTaskListContainer.className = "current-task-list-container";
+currentTaskListContainer.id = "current-task-list-container";
 currentTasksContainer.appendChild(currentTaskListContainer);
 
 // add tasks container
@@ -122,6 +122,7 @@ addTaskListItem.className = "add-task-li";
 const detailsContainer = document.createElement("div");
 // note: add styling
 detailsContainer.id = "details-container";
+detailsContainer.style.display = "none";
 
 // details title
 const detailsTitle = document.createElement("h2");

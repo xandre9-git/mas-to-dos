@@ -28,13 +28,14 @@ function projectCreator() {
 function displayProjects(database, parentNode) {
   for (let i = 0; i < database.length; i++) {
     const addProject = document.createElement("li");
-    addProject.className = "add-projects";
+    addProject.className = "added-projects";
     addProject.textContent = database[i].projectName;
     parentNode.appendChild(addProject);
   }
 }
-
+// function to switch which project is active
 function activeProject(param){
+  // establish default project check
   let activeProject = "My Tasks";
   if (param === activeProject){
     console.log('Already set at "My Tasks"');

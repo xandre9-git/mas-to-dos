@@ -45,7 +45,7 @@ projectsList.addEventListener("click", function(event){
 
 // add project button
 const addProjectButton = document.createElement("li");
-addProjectButton.className = "add-projects";
+addProjectButton.id = "add-project";
 addProjectButton.textContent = "+ Add Project";
 addProjectButton.addEventListener("click", projectCreator);
 projectsList.appendChild(addProjectButton);

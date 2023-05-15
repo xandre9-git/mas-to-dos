@@ -1,6 +1,7 @@
 // --- APP FUNCTIONS ---
 import { projectsAndTasks } from "./data";
 
+// creates projects in database
 function projectCreator() {
   // prompt user for project name
   const projectName = prompt("Enter project name:");
@@ -25,6 +26,7 @@ function projectCreator() {
   }
 }
 
+// displays projects onto the DOM
 function displayProjects(database, parentNode) {
   for (let i = 0; i < database.length; i++) {
     const addProject = document.createElement("li");
@@ -33,25 +35,27 @@ function displayProjects(database, parentNode) {
     parentNode.appendChild(addProject);
   }
 }
+
+// variable to select specific project
+let prevProject = null;
+
 // function to switch which project is active
-function activeProject(param){
-  // establish default project check
-  let defaultProject = "My Tasks"
-  let activeProject = null;
-  // set styling of default task
-  // document.querySelector("")
-
-  if (param === activeProject){
-    console.log('Already set at "My Tasks"');
-    return
-  } else {
-    activeProject = param;
-    console.log(`activeProject is now: ${activeProject}`);
-
-  }
+const projectClicked = (e) => {
+  // check to see if element clicked is a <li> (list item)
+  if (e.target.nodeName === 'LI'){
+    // add .active class to element clicked
+    e.target.classList.add("active");
+    // check to see if there is a previous project that was active
+    if (prevProject !== null) {
+      // removes active class from the element
+      prevProject.classList.remove("active");
+    }
+    // set prevProject as the clicked HTMLIElement
+    prevProject = e.target;
+  }  
 }
 
-
+// creates tasks
 function taskCreator(task, database){
   // find out which database task is to be created in based on project selected, if no project name is clicked, set to 'My Tasks' as default
 
@@ -90,4 +94,4 @@ function displayTasks(database) {
 
 export { projectCreator };
 export { displayProjects };
-export { activeProject };
+export { projectClicked };

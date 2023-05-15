@@ -36,12 +36,32 @@ projectsContainer.appendChild(projectsList);
 // function to display projects on the dom
 displayProjects(projectsAndTasks, projectsList);
 
+// variable to select specific project
+const projectsUl = document.getElementById("projects-ul");
+let prevProject = null;
+
+const projectClicked = (e) => {
+  if (e.target.nodeName === 'UL'){
+    e.target.classList.add("active");
+    if (prevProject !== null) {
+      prevProject.classList.remove("active");
+    }
+    prevProject = e.target;
+  }
+}
+
 // function to change active selected project
 projectsList.addEventListener("click", function(event){
   console.log(`event.target.textContent = ${event.target.textContent}`);
   // get text content value of element that was clicked
   activeProject(event.target.textContent)
+  // change color of project clicked
+  event.target.style.color = "dodgerblue";
+  // figure out how to reset color of non active project
+  // maybe search through nodelist and see if other elements have the same style color?
 })
+
+projectsList.addEventListener("click", projectClicked)
 
 // add project button
 const addProjectButton = document.createElement("li");

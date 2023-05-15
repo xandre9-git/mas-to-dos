@@ -26,16 +26,6 @@ function projectCreator() {
   }
 }
 
-// displays projects onto the DOM
-function displayProjects(database, parentNode) {
-  for (let i = 0; i < database.length; i++) {
-    const addProject = document.createElement("li");
-    addProject.className = "added-projects";
-    addProject.textContent = database[i].projectName;
-    parentNode.appendChild(addProject);
-  }
-}
-
 // variable to select specific project
 let prevProject = null;
 
@@ -53,6 +43,20 @@ const projectClicked = (e) => {
     // set prevProject as the clicked HTMLIElement
     prevProject = e.target;
   }  
+}
+
+// displays projects onto the DOM
+function displayProjects(database, parentNode) {
+  for (let i = 0; i < database.length; i++) {
+    const addProject = document.createElement("li");
+    addProject.className = "added-projects";
+    addProject.textContent = database[i].projectName;
+    if (database[i].projectName === "My Tasks"){
+      addProject.classList.add("active");
+      prevProject = addProject;
+    }
+    parentNode.appendChild(addProject);
+  }
 }
 
 // creates tasks

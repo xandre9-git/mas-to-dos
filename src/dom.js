@@ -3,6 +3,7 @@ import { projectsAndTasks } from "./data";
 import { projectCreator } from "./functions";
 import { displayProjects } from "./functions";
 import { projectClicked } from "./functions";
+import { taskCreator } from "./functions";
 
 // main container for the app
 const body = document.getElementById("content");
@@ -35,9 +36,6 @@ projectsContainer.appendChild(projectsList);
 
 // function to display projects on the dom
 displayProjects(projectsAndTasks, projectsList);
-
-// variable to select specific project
-let prevProject = null;
 
 // function to change active selected project
 projectsList.addEventListener("click", projectClicked)
@@ -111,6 +109,9 @@ addTaskBtn.textContent = "+";
 addTaskBtn.type = "submit";
 // note: add styling
 addTaskBtn.id = "add-task-btn";
+
+addTaskBtn.addEventListener("click",taskCreator);
+
 addTaskContainer.appendChild(addTaskBtn);
 
 // current tasks unordered list

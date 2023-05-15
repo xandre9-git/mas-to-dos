@@ -61,7 +61,8 @@ function displayProjects(database, parentNode) {
 
 // creates tasks
 function taskCreator(task, database){
-  // find out which database task is to be created in based on project selected, if no project name is clicked, set to 'My Tasks' as default
+  // find the active project
+  console.log(`prevProject: ${prevProject}`);
 
   let newTask = {
     id: newId,
@@ -99,3 +100,4 @@ function displayTasks(database) {
 export { projectCreator };
 export { displayProjects };
 export { projectClicked };
+export { taskCreator };

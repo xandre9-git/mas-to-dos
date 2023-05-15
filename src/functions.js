@@ -8,7 +8,7 @@ function projectCreator() {
   // .some() is used on array to search if projectName already exists
   console.log(projectsAndTasks);
   if (
-    projectName != "" &&
+    projectName != null &&
     !projectsAndTasks.some((e) => e.projectName === projectName)
   ) {
     console.log("Criteria met.");
@@ -36,13 +36,18 @@ function displayProjects(database, parentNode) {
 // function to switch which project is active
 function activeProject(param){
   // establish default project check
-  let activeProject = "My Tasks";
+  let defaultProject = "My Tasks"
+  let activeProject = null;
+  // set styling of default task
+  // document.querySelector("")
+
   if (param === activeProject){
     console.log('Already set at "My Tasks"');
     return
   } else {
     activeProject = param;
     console.log(`activeProject is now: ${activeProject}`);
+
   }
 }
 

@@ -60,19 +60,27 @@ function displayProjects(database, parentNode) {
 }
 
 // creates tasks
-function taskCreator(task, database){
-  // find the active project
-  console.log(`prevProject: ${prevProject}`);
+function taskCreator(task){
+  // find the active project in database
+  console.log(`prevProject: ${prevProject.textContent}`);
+  // create variable to search database array for project that is currently active
+  const projectExists = projectsAndTasks.some((e) => e.projectName === prevProject.textContent);
+  console.log(`projectExists: ${projectExists}`);
+  // find index of project found in database
+  const projectIndex = projectsAndTasks.findIndex((e) => e.projectName === prevProject.textContent);
+  console.log(projectIndex);
 
   let newTask = {
-    id: newId,
-    title: title,
-    projectName: database[projectIndex].projectName,
-    dateDue: new Date(),
+    // id: newId,
+    task: task,
+    dateCreated: new Date(),
     timeDue: "",
     priority: "None",
     desc: "",
   };
+
+  projectsAndTasks[projectIndex].currentTasks.push(newTask);
+  console.log(projectsAndTasks);
 }
 
 function displayTasks(database) {

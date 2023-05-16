@@ -70,6 +70,7 @@ function taskCreator(task){
   const projectIndex = projectsAndTasks.findIndex((e) => e.projectName === prevProject.textContent);
   console.log(projectIndex);
 
+  // create newTask object to later push to projectsAndTasks array
   let newTask = {
     // id: newId,
     task: task,
@@ -79,8 +80,14 @@ function taskCreator(task){
     desc: "",
   };
 
+  // push newly created task to correct index of projectsAndTasks in the currentTasks property
   projectsAndTasks[projectIndex].currentTasks.push(newTask);
   console.log(projectsAndTasks);
+
+  // save to localStorage to keep data after page reloads
+  const localStorage = window.localStorage;
+  localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
+  // projectsAndTasks = localStorage.getItem("projectsAndTasks");
 }
 
 function displayTasks(database) {

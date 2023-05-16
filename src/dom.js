@@ -110,7 +110,15 @@ addTaskBtn.type = "submit";
 // note: add styling
 addTaskBtn.id = "add-task-btn";
 
-addTaskBtn.addEventListener("click",taskCreator);
+addTaskBtn.addEventListener("click", function(e){
+  // get input id for task-bar
+  const input = document.getElementById("task-input-bar");
+  // run taskCreator and use value entered in above input element
+  taskCreator(input.value);
+  // clear input
+  input.value = "";
+  location.reload();
+});
 
 addTaskContainer.appendChild(addTaskBtn);
 

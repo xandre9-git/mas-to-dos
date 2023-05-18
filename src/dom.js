@@ -2,6 +2,7 @@
 import { projectsAndTasks } from "./data";
 import { projectCreator } from "./functions";
 import { displayProjects } from "./functions";
+import { displayTasks } from "./functions";
 import { projectClicked } from "./functions";
 import { taskCreator } from "./functions";
 
@@ -40,14 +41,12 @@ displayProjects(projectsAndTasks, projectsList);
 // function to change active selected project
 projectsList.addEventListener("click", projectClicked)
 
-
 // add project button
 const addProjectButton = document.createElement("li");
 addProjectButton.id = "add-project";
 addProjectButton.textContent = "+ Add Project";
 addProjectButton.addEventListener("click", projectCreator);
 projectsList.appendChild(addProjectButton);
-
 
 // project buttons container
 const projectBtns = document.createElement("div");
@@ -117,7 +116,7 @@ addTaskBtn.addEventListener("click", function(e){
   taskCreator(input.value);
   // clear input
   input.value = "";
-  location.reload();
+  // location.reload();
 });
 
 addTaskContainer.appendChild(addTaskBtn);
@@ -131,6 +130,8 @@ currentTaskList.id = "current-tasks-ul";
 const addTaskListItem = document.createElement("li");
 // note: add styling
 addTaskListItem.className = "add-task-li";
+
+displayTasks(projectsAndTasks, currentTaskListContainer);
 
 // DETAILS
 

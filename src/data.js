@@ -1,10 +1,10 @@
 // --- APP DATA ---
 
 // PROJECTs AND TASKS STORAGE
-const projectsAndTasks = [
+const localStorage =  window.localStorage.getItem("projectsAndTasks");
+const projectsAndTasks = (localStorage != null) ? JSON.parse(localStorage) : [
   { projectName: "My Tasks", currentTasks: [], completedTasks: [] }, { projectName: "Odin", currentTasks: [], completedTasks: [] }
 ];
 
-// export
-
+// exports
 export { projectsAndTasks };

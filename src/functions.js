@@ -46,30 +46,33 @@ const projectClicked = (e) => {
 }
 
 // displays projects onto the DOM
-function displayProjects(database, parentNode) {
-  for (let i = 0; i < database.length; i++) {
+function displayProjects(arr, parentNode) {
+  // loop through array
+  for (let i = 0; i < arr.length; i++) {
+    // create list item for project
     const addProject = document.createElement("li");
+    // give it class used for added projects
     addProject.className = "added-projects";
-    addProject.textContent = database[i].projectName;
-    if (database[i].projectName === "My Tasks"){
+    // set the text content to the project name found in this iteration
+    addProject.textContent = arr[i].projectName;
+    // create conditional to check if default task is matched
+    if (arr[i].projectName === "My Tasks"){
+      // set default project to active 
       addProject.classList.add("active");
+      // set variable that monitors active projects to default project
       prevProject = addProject;
     }
+    // append newly added project to specified node
     parentNode.appendChild(addProject);
   }
 }
 
 // creates tasks
 function taskCreator(task){
-  // find the active project in database
-  console.log(`prevProject: ${prevProject.textContent}`);
   // create variable to search database array for project that is currently active
   const projectExists = projectsAndTasks.some((e) => e.projectName === prevProject.textContent);
-  console.log(`projectExists: ${projectExists}`);
   // find index of project found in database
   const projectIndex = projectsAndTasks.findIndex((e) => e.projectName === prevProject.textContent);
-  console.log(projectIndex);
-
   // create newTask object to later push to projectsAndTasks array
   let newTask = {
     // id: newId,
@@ -79,26 +82,23 @@ function taskCreator(task){
     priority: "None",
     desc: "",
   };
-
   // push newly created task to correct index of projectsAndTasks in the currentTasks property
   projectsAndTasks[projectIndex].currentTasks.push(newTask);
-  console.log(projectsAndTasks);
-
   // save to localStorage to keep data after page reloads
-  const localStorage = window.localStorage;
-  localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
-  // projectsAndTasks = localStorage.getItem("projectsAndTasks");
+  return localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
 }
 
-function displayTasks(database) {
+function displayTasks(arr, parentNode) {
 
-  for (let i = 0; i < database.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
+    console.log(arr.length);
+    console.log(arr);
     const taskContainer = document.createElement("div");
     taskContainer.className = "task-list-item-container";
   
     const listItem = document.createElement("li");
     listItem.className = "task-list-item";
-    listItem.textContent = database[i].currentTasks;
+    listItem.textContent = arr[i].currentTasks;
     taskContainer.appendChild(listItem);
   
     const editBtn = document.createElement("div");
@@ -108,11 +108,15 @@ function displayTasks(database) {
     const completeBtn = document.createElement("div");
     completeBtn.className = "task-complete-btn";
     taskContainer.appendChild(completeBtn);
+
+    parentNode.appendChild(taskContainer);
   }
   
 }
 
+// exports
 export { projectCreator };
 export { displayProjects };
+export { displayTasks };
 export { projectClicked };
 export { taskCreator };

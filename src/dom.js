@@ -125,13 +125,14 @@ addTaskContainer.appendChild(addTaskBtn);
 const currentTaskList = document.createElement("div");
 // note: add styling
 currentTaskList.id = "current-tasks-ul";
+currentTaskListContainer.appendChild(currentTaskList);
 
 // current tasks list item
 const addTaskListItem = document.createElement("li");
 // note: add styling
 addTaskListItem.className = "add-task-li";
 
-displayTasks(projectsAndTasks, currentTaskListContainer);
+// displayTasks("My Tasks", projectsAndTasks, currentTaskListContainer);
 
 // DETAILS
 
@@ -281,3 +282,4 @@ body.appendChild(todoBoardsContainer);
 body.appendChild(detailsContainer);
 
 export { body };
+export { currentTaskList}

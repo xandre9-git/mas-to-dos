@@ -122,23 +122,28 @@ function displayTasks(project, arr, parentNode) {
     const taskContainer = document.createElement("div");
     taskContainer.className = "task-list-item-container";
 
+    const actionBtnContainer = document.createElement("div");
+    actionBtnContainer.className = "task-action-btn-container";
+
     const listItem = document.createElement("li");
     listItem.className = "task-list-item";
     listItem.textContent = tasks[i];
     taskContainer.appendChild(listItem);
 
-    const editBtn = document.createElement("div");
-    editBtn.className = "task-edit-btn";
-    taskContainer.appendChild(editBtn);
-
     const completeBtn = document.createElement("input");
     completeBtn.className = "task-complete-btn";
     completeBtn.type = "checkbox";
-    taskContainer.appendChild(completeBtn);
+    actionBtnContainer.appendChild(completeBtn);
+
+    const editBtn = document.createElement("div");
+    editBtn.className = "task-edit-btn";
+    actionBtnContainer.appendChild(editBtn);
 
     const deleteBtn = document.createElement("div");
     deleteBtn.className = "task-delete-btn";
-    taskContainer.appendChild(deleteBtn);
+    actionBtnContainer.appendChild(deleteBtn);
+
+    taskContainer.appendChild(actionBtnContainer);
 
     parentNode.appendChild(taskContainer);
   }

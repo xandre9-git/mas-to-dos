@@ -35,11 +35,11 @@ const projectClicked = (e) => {
   // check to see if element clicked is a <li> (list item)
   if (e.target.nodeName === "LI") {
     // add .active class to element clicked
-    e.target.classList.add("active");
+    e.target.classList.add("active-project");
     // check to see if there is a previous project that was active
     if (prevProject !== null) {
       // removes active class from the element
-      prevProject.classList.remove("active");
+      prevProject.classList.remove("active-project");
     }
     // set prevProject as the clicked HTMLIElement
     prevProject = e.target;
@@ -59,7 +59,7 @@ function displayProjects(arr, parentNode) {
     // create conditional to check if default task is matched
     if (arr[i].projectName === "My Tasks") {
       // set default project to active
-      addProject.classList.add("active");
+      addProject.classList.add("active-project");
       // set variable that monitors active projects to default project
       prevProject = addProject;
     }
@@ -102,6 +102,24 @@ function taskCreator(task) {
     JSON.stringify(projectsAndTasks)
   );
 }
+
+// variable to select specific project
+let prevTask = null;
+
+const taskClicked = (e) => {
+  // check to see if element clicked is a <li> (list item)
+  if (e.target.nodeName === "LI") {
+    // add .active class to element clicked
+    e.target.classList.add("active-task");
+    // check to see if there is a previous project that was active
+    if (prevTask !== null) {
+      // removes active class from the element
+      prevTask.classList.remove("active-task");
+    }
+    // set prevTask as the clicked HTMLIElement
+    prevTask = e.target;
+  }
+};
 
 function displayTasks(project, arr, parentNode) {
   // first find the project name in the array
@@ -155,3 +173,4 @@ export { displayProjects };
 export { displayTasks };
 export { projectClicked };
 export { taskCreator };
+export { taskClicked };

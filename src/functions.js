@@ -136,11 +136,9 @@ function displayTasks(project, arr, parentNode) {
     completeBtn.type = "checkbox";
     taskContainer.appendChild(completeBtn);
 
-    // function createCheckbox() {
-    //   const checkbox = document.createElement("input"); // rename variable
-    //   checkbox.type = "checkbox";
-    //   return checkbox;
-    // }
+    const deleteBtn = document.createElement("div");
+    deleteBtn.className = "task-delete-btn";
+    taskContainer.appendChild(deleteBtn);
 
     parentNode.appendChild(taskContainer);
   }

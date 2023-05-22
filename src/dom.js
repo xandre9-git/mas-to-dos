@@ -132,7 +132,7 @@ const addTaskListItem = document.createElement("li");
 // note: add styling
 addTaskListItem.className = "add-task-li";
 
-// displayTasks("My Tasks", projectsAndTasks, currentTaskListContainer);
+displayTasks("My Tasks", projectsAndTasks, currentTaskList);
 
 // DETAILS
 

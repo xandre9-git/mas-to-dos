@@ -157,3 +157,21 @@ h1 {
   list-style-type: none;
   cursor: pointer;
 }
+
+.task-action-btn-container {
+  display: flex;
+}
+
+.task-edit-btn {
+  background-image: url("./images/edit.svg");
+}
+
+.task-delete-btn {
+  background-image: url("./images/delete.svg");
+}
+
+.task-edit-btn, .task-delete-btn {
+  height: 1.25em;
+  width: 1.25em;
+  background-size: 100% 100%;
+}

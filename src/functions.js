@@ -151,14 +151,17 @@ function displayTasks(project, arr, parentNode) {
     const completeBtn = document.createElement("input");
     completeBtn.className = "task-complete-btn";
     completeBtn.type = "checkbox";
+    completeBtn.title = "Complete Task";
     actionBtnContainer.appendChild(completeBtn);
 
     const editBtn = document.createElement("div");
     editBtn.className = "task-edit-btn";
+    editBtn.title = "Edit Task Details";
     actionBtnContainer.appendChild(editBtn);
 
     const deleteBtn = document.createElement("div");
     deleteBtn.className = "task-delete-btn";
+    deleteBtn.title = "Delete Task";
     actionBtnContainer.appendChild(deleteBtn);
 
     taskContainer.appendChild(actionBtnContainer);

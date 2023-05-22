@@ -145,3 +145,14 @@ h1 {
 .active {
   color: #ffdb58;
 }
+
+.task-list-item-container {
+  margin-left: 3%;
+  margin-right: 3%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-list-item {
+  list-style-type: none;
+}

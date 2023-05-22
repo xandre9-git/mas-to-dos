@@ -64,11 +64,11 @@ function displayProjects(arr, parentNode) {
       prevProject = addProject;
     }
     // add event listener to include tasks for the project
-    addProject.addEventListener("click", function(e){
+    addProject.addEventListener("click", function (e) {
       console.log(e.target.textContent);
       let project = e.target.textContent;
-      currentTaskList.innerHTML = "";
-      displayTasks(project, projectsAndTasks, currentTaskList)
+      // currentTaskList.innerHTML = "";
+      displayTasks(project, projectsAndTasks, currentTaskList);
     });
     // append newly added project to specified node
     parentNode.appendChild(addProject);
@@ -111,13 +111,14 @@ function displayTasks(project, arr, parentNode) {
 
   const tasks = [];
 
-  Object.values(arr[projectIndex].currentTasks).forEach((e) => tasks.push(e.task));
+  Object.values(arr[projectIndex].currentTasks).forEach((e) =>
+    tasks.push(e.task)
+  );
 
   console.log(tasks);
+  parentNode.innerHTML = "";
 
   for (let i = 0; i < tasks.length; i++) {
-
-
     const taskContainer = document.createElement("div");
     taskContainer.className = "task-list-item-container";
 
@@ -130,9 +131,16 @@ function displayTasks(project, arr, parentNode) {
     editBtn.className = "task-edit-btn";
     taskContainer.appendChild(editBtn);
 
-    const completeBtn = document.createElement("div");
+    const completeBtn = document.createElement("input");
     completeBtn.className = "task-complete-btn";
+    completeBtn.type = "checkbox";
     taskContainer.appendChild(completeBtn);
+
+    // function createCheckbox() {
+    //   const checkbox = document.createElement("input"); // rename variable
+    //   checkbox.type = "checkbox";
+    //   return checkbox;
+    // }
 
     parentNode.appendChild(taskContainer);
   }

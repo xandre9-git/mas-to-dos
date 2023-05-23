@@ -174,30 +174,6 @@ h1 {
   display: flex;
 }
 
-.task-edit-btn-hover {
-  background-image: url("./images/edit.svg");
-}
-
-.task-edit-btn:hover {
-  /* rebeccapurple */
-  filter: invert(22%) sepia(31%) saturate(4036%) hue-rotate(252deg) brightness(91%) contrast(90%);
-}
-
-.task-delete-btn-hover {
-  background-image: url("./images/delete.svg");
-}
-
-.task-delete-btn:hover {
-  /* bloodred */
-  filter: invert(12%) sepia(85%) saturate(2771%) hue-rotate(354deg) brightness(97%) contrast(100%);
-}
-
-.task-edit-btn, .task-delete-btn {
-  height: 1.25em;
-  width: 1.25em;
-  background-size: 100% 100%;
-  cursor: pointer;
-}
 
 .active-task {
   color: dodgerblue;

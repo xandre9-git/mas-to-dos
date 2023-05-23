@@ -140,6 +140,7 @@ function displayTasks(project, arr, parentNode) {
     const taskContainer = document.createElement("div");
     taskContainer.className = "task-list-item-container";
 
+
     const actionBtnContainer = document.createElement("div");
     actionBtnContainer.className = "task-action-btn-container";
 
@@ -158,11 +159,24 @@ function displayTasks(project, arr, parentNode) {
     editBtn.className = "task-edit-btn";
     editBtn.title = "Edit Task Details";
     actionBtnContainer.appendChild(editBtn);
+    taskContainer.addEventListener("mouseover", function(){
+      editBtn.classList.add("task-edit-btn-hover");
+    })
+    taskContainer.addEventListener("mouseout", function(){
+      editBtn.classList.remove("task-edit-btn-hover");
+    })
+
 
     const deleteBtn = document.createElement("div");
     deleteBtn.className = "task-delete-btn";
     deleteBtn.title = "Delete Task";
     actionBtnContainer.appendChild(deleteBtn);
+    taskContainer.addEventListener("mouseover", function(){
+      deleteBtn.classList.add("task-delete-btn-hover");
+    })
+    taskContainer.addEventListener("mouseout", function(){
+      deleteBtn.classList.remove("task-delete-btn-hover");
+    })
 
     taskContainer.appendChild(actionBtnContainer);
 

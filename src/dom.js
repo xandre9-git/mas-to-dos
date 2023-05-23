@@ -2,8 +2,9 @@
 import { projectsAndTasks } from "./data";
 import { projectCreator } from "./functions";
 import { displayProjects } from "./functions";
-import { displayTasks } from "./functions";
 import { projectClicked } from "./functions";
+import { prevProject } from "./functions";
+import { displayTasks } from "./functions";
 import { taskClicked } from "./functions";
 import { taskCreator } from "./functions";
 
@@ -40,7 +41,7 @@ projectsContainer.appendChild(projectsList);
 displayProjects(projectsAndTasks, projectsList);
 
 // function to change active selected project
-projectsList.addEventListener("click", projectClicked)
+projectsList.addEventListener("click", projectClicked);
 
 // add project button
 const addProjectButton = document.createElement("li");
@@ -110,7 +111,7 @@ addTaskBtn.type = "submit";
 // note: add styling
 addTaskBtn.id = "add-task-btn";
 
-addTaskBtn.addEventListener("click", function(e){
+addTaskBtn.addEventListener("click", function (e) {
   // get input id for task-bar
   const input = document.getElementById("task-input-bar");
   // run taskCreator and use value entered in above input element
@@ -136,7 +137,7 @@ addTaskListItem.className = "add-task-li";
 displayTasks("My Tasks", projectsAndTasks, currentTaskList);
 
 // function to change active selected task
-currentTaskList.addEventListener("click", taskClicked)
+currentTaskList.addEventListener("click", taskClicked);
 
 // DETAILS
 
@@ -286,4 +287,4 @@ body.appendChild(todoBoardsContainer);
 body.appendChild(detailsContainer);
 
 export { body };
-export { currentTaskList}
+export { currentTaskList };

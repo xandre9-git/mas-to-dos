@@ -8,7 +8,7 @@ function projectCreator() {
   const projectName = prompt("Enter project name:");
   // take project name and check if project name is empty string or an existing project
   // .some() is used on array to search if projectName already exists
-  console.log(projectsAndTasks);
+  console.log(`projectsAndTasks: ${projectsAndTasks}`);
   if (
     projectName != null &&
     !projectsAndTasks.some((e) => e.projectName === projectName)
@@ -21,10 +21,17 @@ function projectCreator() {
       completedTasks: [],
     });
     console.log(projectsAndTasks);
+    localStorage.setItem(
+      "projectsAndTasks",
+      JSON.stringify(projectsAndTasks)
+    );
   } else {
     console.log("Criteria not met.");
     return;
   }
+
+  location.reload();
+
 }
 
 // variable to select specific project
@@ -96,6 +103,8 @@ function taskCreator(task) {
   };
   // push newly created task to correct index of projectsAndTasks in the currentTasks property
   projectsAndTasks[projectIndex].currentTasks.push(newTask);
+  // reload the document
+  location.reload();
   // save to localStorage to keep data after page reloads
   return localStorage.setItem(
     "projectsAndTasks",
@@ -155,28 +164,28 @@ function displayTasks(project, arr, parentNode) {
     completeBtn.title = "Complete Task";
     actionBtnContainer.appendChild(completeBtn);
 
-    const editBtn = document.createElement("div");
-    editBtn.className = "task-edit-btn";
-    editBtn.title = "Edit Task Details";
-    actionBtnContainer.appendChild(editBtn);
-    taskContainer.addEventListener("mouseover", function(){
-      editBtn.classList.add("task-edit-btn-hover");
-    })
-    taskContainer.addEventListener("mouseout", function(){
-      editBtn.classList.remove("task-edit-btn-hover");
-    })
+    // const editBtn = document.createElement("div");
+    // editBtn.className = "task-edit-btn";
+    // editBtn.title = "Edit Task Details";
+    // actionBtnContainer.appendChild(editBtn);
+    // taskContainer.addEventListener("mouseover", function(){
+    //   editBtn.classList.add("task-edit-btn-hover");
+    // })
+    // taskContainer.addEventListener("mouseout", function(){
+    //   editBtn.classList.remove("task-edit-btn-hover");
+    // })
 
 
-    const deleteBtn = document.createElement("div");
-    deleteBtn.className = "task-delete-btn";
-    deleteBtn.title = "Delete Task";
-    actionBtnContainer.appendChild(deleteBtn);
-    taskContainer.addEventListener("mouseover", function(){
-      deleteBtn.classList.add("task-delete-btn-hover");
-    })
-    taskContainer.addEventListener("mouseout", function(){
-      deleteBtn.classList.remove("task-delete-btn-hover");
-    })
+    // const deleteBtn = document.createElement("div");
+    // deleteBtn.className = "task-delete-btn";
+    // deleteBtn.title = "Delete Task";
+    // actionBtnContainer.appendChild(deleteBtn);
+    // taskContainer.addEventListener("mouseover", function(){
+    //   deleteBtn.classList.add("task-delete-btn-hover");
+    // })
+    // taskContainer.addEventListener("mouseout", function(){
+    //   deleteBtn.classList.remove("task-delete-btn-hover");
+    // })
 
     taskContainer.appendChild(actionBtnContainer);
 

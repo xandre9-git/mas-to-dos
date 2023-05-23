@@ -8,7 +8,6 @@ function projectCreator() {
   const projectName = prompt("Enter project name:");
   // take project name and check if project name is empty string or an existing project
   // .some() is used on array to search if projectName already exists
-  console.log(`projectsAndTasks: ${projectsAndTasks}`);
   if (
     projectName != null &&
     !projectsAndTasks.some((e) => e.projectName === projectName)
@@ -20,18 +19,14 @@ function projectCreator() {
       currentTasks: [],
       completedTasks: [],
     });
-    console.log(projectsAndTasks);
-    localStorage.setItem(
-      "projectsAndTasks",
-      JSON.stringify(projectsAndTasks)
-    );
+    // save newly created project to localStorage
+    localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
   } else {
     console.log("Criteria not met.");
     return;
   }
-
+  // reload the document
   location.reload();
-
 }
 
 // variable to select specific project
@@ -72,9 +67,9 @@ function displayProjects(arr, parentNode) {
     }
     // add event listener to include tasks for the project
     addProject.addEventListener("click", function (e) {
-      console.log(e.target.textContent);
+      // create variable to store project name clicked
       let project = e.target.textContent;
-      // currentTaskList.innerHTML = "";
+      // use above variable as arg for displayTasks()
       displayTasks(project, projectsAndTasks, currentTaskList);
     });
     // append newly added project to specified node
@@ -135,20 +130,20 @@ function displayTasks(project, arr, parentNode) {
   const projectIndex = projectsAndTasks.findIndex(
     (e) => e.projectName === project
   );
-
+  // create empty array for current tasks
   const tasks = [];
 
+  // extracts tasks from 'currentTasks' property of an object in the 'arr' array and pushes into the tasks array
   Object.values(arr[projectIndex].currentTasks).forEach((e) =>
     tasks.push(e.task)
   );
-
-  console.log(tasks);
+  // reset the contents of the parentNode argument
   parentNode.innerHTML = "";
 
+  // for loop to create tasks, checkboxes and add classes
   for (let i = 0; i < tasks.length; i++) {
     const taskContainer = document.createElement("div");
     taskContainer.className = "task-list-item-container";
-
 
     const actionBtnContainer = document.createElement("div");
     actionBtnContainer.className = "task-action-btn-container";
@@ -164,29 +159,6 @@ function displayTasks(project, arr, parentNode) {
     completeBtn.title = "Complete Task";
     actionBtnContainer.appendChild(completeBtn);
 
-    // const editBtn = document.createElement("div");
-    // editBtn.className = "task-edit-btn";
-    // editBtn.title = "Edit Task Details";
-    // actionBtnContainer.appendChild(editBtn);
-    // taskContainer.addEventListener("mouseover", function(){
-    //   editBtn.classList.add("task-edit-btn-hover");
-    // })
-    // taskContainer.addEventListener("mouseout", function(){
-    //   editBtn.classList.remove("task-edit-btn-hover");
-    // })
-
-
-    // const deleteBtn = document.createElement("div");
-    // deleteBtn.className = "task-delete-btn";
-    // deleteBtn.title = "Delete Task";
-    // actionBtnContainer.appendChild(deleteBtn);
-    // taskContainer.addEventListener("mouseover", function(){
-    //   deleteBtn.classList.add("task-delete-btn-hover");
-    // })
-    // taskContainer.addEventListener("mouseout", function(){
-    //   deleteBtn.classList.remove("task-delete-btn-hover");
-    // })
-
     taskContainer.appendChild(actionBtnContainer);
 
     parentNode.appendChild(taskContainer);
@@ -196,7 +168,8 @@ function displayTasks(project, arr, parentNode) {
 // exports
 export { projectCreator };
 export { displayProjects };
-export { displayTasks };
 export { projectClicked };
+export { prevProject };
+export { displayTasks };
 export { taskCreator };
 export { taskClicked };

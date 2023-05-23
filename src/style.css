@@ -174,7 +174,7 @@ h1 {
   display: flex;
 }
 
-.task-edit-btn {
+.task-edit-btn-hover {
   background-image: url("./images/edit.svg");
 }
 
@@ -183,7 +183,7 @@ h1 {
   filter: invert(22%) sepia(31%) saturate(4036%) hue-rotate(252deg) brightness(91%) contrast(90%);
 }
 
-.task-delete-btn {
+.task-delete-btn-hover {
   background-image: url("./images/delete.svg");
 }
 

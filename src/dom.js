@@ -4,6 +4,7 @@ import { projectCreator } from "./functions";
 import { displayProjects } from "./functions";
 import { projectClicked } from "./functions";
 import { prevProject } from "./functions";
+import { activeProject } from "./functions";
 import { displayTasks } from "./functions";
 import { taskClicked } from "./functions";
 import { taskCreator } from "./functions";
@@ -134,7 +135,7 @@ const addTaskListItem = document.createElement("li");
 // note: add styling
 addTaskListItem.className = "add-task-li";
 
-displayTasks("My Tasks", projectsAndTasks, currentTaskList);
+displayTasks(activeProject, projectsAndTasks, currentTaskList);
 
 // function to change active selected task
 currentTaskList.addEventListener("click", taskClicked);

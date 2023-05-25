@@ -30,7 +30,10 @@ function projectCreator() {
 }
 
 // variable to select specific project
+const activeProjectLocalStorage = window.localStorage.getItem("activeProject");
+// let prevProject = (activeProjectLocalStorage != null) ? JSON.parse(activeProjectLocalStorage) :  null;
 let prevProject = null;
+let activeProject = (activeProjectLocalStorage != null) ? activeProjectLocalStorage :  null;
 
 // function to switch which project is active
 const projectClicked = (e) => {
@@ -38,6 +41,8 @@ const projectClicked = (e) => {
   if (e.target.nodeName === "LI") {
     // add .active class to element clicked
     e.target.classList.add("active-project");
+    activeProject = e.target;
+    localStorage.setItem("activeProject", activeProject.textContent);
     // check to see if there is a previous project that was active
     if (prevProject !== null) {
       // removes active class from the element
@@ -45,11 +50,13 @@ const projectClicked = (e) => {
     }
     // set prevProject as the clicked HTMLIElement
     prevProject = e.target;
+    // localStorage.setItem("prevProject", JSON.stringify(prevProject));
   }
 };
 
 // displays projects onto the DOM
 function displayProjects(arr, parentNode) {
+  console.log(activeProject);
   // loop through array
   for (let i = 0; i < arr.length; i++) {
     // create list item for project
@@ -59,7 +66,7 @@ function displayProjects(arr, parentNode) {
     // set the text content to the project name found in this iteration
     addProject.textContent = arr[i].projectName;
     // create conditional to check if default task is matched
-    if (arr[i].projectName === "My Tasks") {
+    if (arr[i].projectName === activeProject) {
       // set default project to active
       addProject.classList.add("active-project");
       // set variable that monitors active projects to default project
@@ -169,6 +176,7 @@ function displayTasks(project, arr, parentNode) {
 export { projectCreator };
 export { displayProjects };
 export { projectClicked };
+export {activeProject};
 export { prevProject };
 export { displayTasks };
 export { taskCreator };

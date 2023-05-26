@@ -45,6 +45,12 @@ h1 {
   grid-area: c;
   background-color: rgb(0, 188, 240);
   height: 90vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+#current-tasks-container {
+  flex: 1;
 }
 
 #current-task-list-container {
@@ -64,9 +70,11 @@ h1 {
 }
 
 #details-container {
-  grid-area: c;
+  /* grid-area: c; */
   background-color: rgb(20, 165, 173);
   height: 90vh;
+  flex-direction: column;
+  flex: 1;
 }
 
 #details {
@@ -86,7 +94,7 @@ h1 {
 
 #details textarea {
   height: 125px;
-  width: 375px;
+  width: 275px;
 }
 
 #details-btn-container {
@@ -173,7 +181,6 @@ h1 {
 .task-action-btn-container {
   display: flex;
 }
-
 
 .active-task {
   color: dodgerblue;

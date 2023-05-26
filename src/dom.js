@@ -72,14 +72,16 @@ projectBtns.appendChild(deleteProjectBtn);
 
 // TO DOS
 
+
 // to do board container
 const todoBoardsContainer = document.createElement("div");
 todoBoardsContainer.id = "to-dos-container";
-todoBoardsContainer.style.display = "block";
+todoBoardsContainer.style.display = "flex";
 
 // current tasks container
 const currentTasksContainer = document.createElement("div");
 currentTasksContainer.id = "current-tasks-container";
+currentTasksContainer.style.display = "block";
 todoBoardsContainer.appendChild(currentTasksContainer);
 
 // current tasks title
@@ -153,7 +155,7 @@ currentTaskList.addEventListener("click", taskClicked);
 const detailsContainer = document.createElement("div");
 // note: add styling
 detailsContainer.id = "details-container";
-detailsContainer.style.display = "none";
+detailsContainer.style.display = "block";
 
 // details title
 const detailsTitle = document.createElement("h2");
@@ -184,6 +186,21 @@ projectSelectorContainer.appendChild(selectProject);
 const selectNone = document.createElement("option");
 selectNone.text = "None";
 selectProject.appendChild(selectNone);
+
+// details task input container
+const taskInputContainer = document.createElement("div");
+taskInputContainer.id = "edit-task-container";
+details.appendChild(taskInputContainer);
+
+// details project selector title
+const taskInputTitle = document.createElement("h3");
+taskInputTitle.textContent = "Task";
+taskInputContainer.appendChild(taskInputTitle);
+
+// details task input
+const taskInput = document.createElement("input");
+taskInput.value = "Placeholder";
+taskInputContainer.appendChild(taskInput);
 
 // details date due container
 const dateDueContainer = document.createElement("div");
@@ -288,11 +305,13 @@ detailsDeleteBtn.id = "delete-btn";
 detailsDeleteBtn.title = "Delete Task";
 detailsBtnContainer.appendChild(detailsDeleteBtn);
 
+todoBoardsContainer.appendChild(detailsContainer);
+
 // dom #content appends
 body.appendChild(topBar);
 body.appendChild(leftSideBar);
 body.appendChild(todoBoardsContainer);
-body.appendChild(detailsContainer);
+
 
 export { body };
 export { currentTaskList };

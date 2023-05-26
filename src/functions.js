@@ -31,9 +31,9 @@ function projectCreator() {
 
 // variable to select specific project
 const activeProjectLocalStorage = window.localStorage.getItem("activeProject");
-// let prevProject = (activeProjectLocalStorage != null) ? JSON.parse(activeProjectLocalStorage) :  null;
 let prevProject = null;
-let activeProject = (activeProjectLocalStorage != null) ? activeProjectLocalStorage :  null;
+let activeProject =
+  activeProjectLocalStorage != null ? activeProjectLocalStorage : null;
 
 // function to switch which project is active
 const projectClicked = (e) => {
@@ -50,13 +50,11 @@ const projectClicked = (e) => {
     }
     // set prevProject as the clicked HTMLIElement
     prevProject = e.target;
-    // localStorage.setItem("prevProject", JSON.stringify(prevProject));
   }
 };
 
 // displays projects onto the DOM
 function displayProjects(arr, parentNode) {
-  console.log(activeProject);
   // loop through array
   for (let i = 0; i < arr.length; i++) {
     // create list item for project
@@ -158,6 +156,9 @@ function displayTasks(project, arr, parentNode) {
     const listItem = document.createElement("li");
     listItem.className = "task-list-item";
     listItem.textContent = tasks[i];
+    listItem.addEventListener("click", function(e){
+      editDetails();
+    })
     taskContainer.appendChild(listItem);
 
     const completeBtn = document.createElement("input");
@@ -172,11 +173,15 @@ function displayTasks(project, arr, parentNode) {
   }
 }
 
+function editDetails(param){
+  console.log('Testing editDetails.');
+}
+
 // exports
 export { projectCreator };
 export { displayProjects };
 export { projectClicked };
-export {activeProject};
+export { activeProject };
 export { prevProject };
 export { displayTasks };
 export { taskCreator };

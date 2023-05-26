@@ -3,7 +3,6 @@ import { projectsAndTasks } from "./data";
 import { projectCreator } from "./functions";
 import { displayProjects } from "./functions";
 import { projectClicked } from "./functions";
-import { prevProject } from "./functions";
 import { activeProject } from "./functions";
 import { displayTasks } from "./functions";
 import { taskClicked } from "./functions";
@@ -103,6 +102,15 @@ currentTaskListContainer.appendChild(addTaskContainer);
 const addTasksInput = document.createElement("input");
 addTasksInput.id = "task-input-bar";
 addTasksInput.placeholder = "Add a task";
+addTasksInput.addEventListener("keypress", function (e) {
+  //if user presses enter on keyboard
+  if (e.key === "Enter") {
+    // run taskCreator and use value entered in above input element
+    taskCreator(addTasksInput.value);
+    // clear addTasksInput
+    addTasksInput.value = "";
+  }
+});
 addTaskContainer.appendChild(addTasksInput);
 
 // add tasks submit button
@@ -119,7 +127,6 @@ addTaskBtn.addEventListener("click", function (e) {
   taskCreator(input.value);
   // clear input
   input.value = "";
-  // location.reload();
 });
 
 addTaskContainer.appendChild(addTaskBtn);

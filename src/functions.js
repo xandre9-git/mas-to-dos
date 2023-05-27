@@ -173,8 +173,14 @@ function displayTasks(project, arr, parentNode) {
   }
 }
 
-function editDetails(param){
-  console.log('Testing editDetails.');
+function editDetails(){
+  const querySelected = document.getElementById("details-container");
+  console.log(querySelected);
+  if (querySelected.style.display == "none") {
+    querySelected.style.display = "block";
+  } else {
+    querySelected.style.display = "none";
+  }
 }
 
 // exports

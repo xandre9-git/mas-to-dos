@@ -155,7 +155,7 @@ currentTaskList.addEventListener("click", taskClicked);
 const detailsContainer = document.createElement("div");
 // note: add styling
 detailsContainer.id = "details-container";
-detailsContainer.style.display = "block";
+detailsContainer.style.display = "none";
 
 // details title
 const detailsTitle = document.createElement("h2");

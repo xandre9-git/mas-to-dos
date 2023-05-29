@@ -118,9 +118,11 @@ let prevTask = null;
 const taskClicked = (e) => {
   // check to see if element clicked is a <li> (list item)
   if (e.target.nodeName === "LI") {
+    editDetails(e.target);
     // add .active class to element clicked
     e.target.classList.add("active-task");
     // check to see if there is a previous project that was active
+
     if (prevTask !== null) {
       // removes active class from the element
       prevTask.classList.remove("active-task");
@@ -156,9 +158,6 @@ function displayTasks(project, arr, parentNode) {
     const listItem = document.createElement("li");
     listItem.className = "task-list-item";
     listItem.textContent = tasks[i];
-    listItem.addEventListener("click", function(e){
-      editDetails();
-    })
     taskContainer.appendChild(listItem);
 
     const completeBtn = document.createElement("input");
@@ -173,12 +172,27 @@ function displayTasks(project, arr, parentNode) {
   }
 }
 
-function editDetails(){
+// let activeTask = document.getElementsByClassName("active-task");
+// let activeTaskArray = Array.from(activeTask);
+
+
+function editDetails(str) {
+  // Get the details container element.
   const querySelected = document.getElementById("details-container");
-  console.log(querySelected);
-  if (querySelected.style.display == "none") {
+
+  // If the details container is not visible, show it.
+  if (querySelected.style.display === "none") {
     querySelected.style.display = "block";
+    const taskTitle = str.textContent;
+
+    // find the object containing the task provided as an argument
+    const taskObject = projectsAndTasks.flatMap(project => project.currentTasks) // flatten the nested array of task
+    .filter(task => task.task === taskTitle); // filter the tasks by task name
+    console.log(taskObject);
+    
+
   } else {
+    // If the details container is already visible, hide it.
     querySelected.style.display = "none";
   }
 }

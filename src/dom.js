@@ -189,16 +189,17 @@ selectProject.appendChild(selectNone);
 
 // details task input container
 const taskInputContainer = document.createElement("div");
-taskInputContainer.id = "edit-task-container";
+taskInputContainer.id = "edit-task-name";
 details.appendChild(taskInputContainer);
 
-// details project selector title
+// details task title
 const taskInputTitle = document.createElement("h3");
 taskInputTitle.textContent = "Task";
 taskInputContainer.appendChild(taskInputTitle);
 
 // details task input
 const taskInput = document.createElement("input");
+taskInput.id = "task-input-detail";
 taskInput.value = "Placeholder";
 taskInputContainer.appendChild(taskInput);
 

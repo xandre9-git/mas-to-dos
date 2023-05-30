@@ -2,6 +2,28 @@
 import { projectsAndTasks } from "./data";
 import { currentTaskList } from "./dom";
 
+// date functions
+// create newDate based on current date
+
+function currentDate(){
+  const date = new Date();
+
+  // function to add two digit padding
+  function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+  }
+  
+  const currentYear = date.getFullYear();
+  const currentMonth = padTo2Digits(date.getMonth() + 1);
+  const currentDay = date.getDate();
+  currentYear.toString();
+  // currentMonth.toString();
+  // currentDay.toString();
+  const yearMonthDay = `${currentYear}-${currentMonth}-${currentDay}`;
+  return yearMonthDay;
+}
+
+
 // creates projects in database
 function projectCreator() {
   // prompt user for project name
@@ -92,11 +114,13 @@ function taskCreator(task) {
   const projectIndex = projectsAndTasks.findIndex(
     (e) => e.projectName === prevProject.textContent
   );
+
   // create newTask object to later push to projectsAndTasks array
   let newTask = {
     // id: newId,
     task: task,
     dateCreated: new Date(),
+    dateDue: currentDate(),
     timeDue: "",
     priority: "None",
     desc: "",
@@ -172,10 +196,6 @@ function displayTasks(project, arr, parentNode) {
   }
 }
 
-// let activeTask = document.getElementsByClassName("active-task");
-// let activeTaskArray = Array.from(activeTask);
-
-
 function editDetails(str) {
   // Get the details container element.
   const querySelected = document.getElementById("details-container");
@@ -186,11 +206,31 @@ function editDetails(str) {
     const taskTitle = str.textContent;
 
     // find the object containing the task provided as an argument
-    const taskObject = projectsAndTasks.flatMap(project => project.currentTasks) // flatten the nested array of task
-    .filter(task => task.task === taskTitle); // filter the tasks by task name
+    const taskObject = projectsAndTasks
+      .flatMap((project) => project.currentTasks) // flatten the nested array of tasks
+      .filter((task) => task.task === taskTitle); // filter the tasks by task name
     console.log(taskObject);
-    
 
+    // task
+    console.log(taskObject[0].task);
+    // dateCreated
+    console.log(taskObject[0].dateCreated);
+    // timeDue
+    console.log(taskObject[0].timeDue);
+    // priority
+    console.log(taskObject[0].priority);
+    // desc
+    console.log(taskObject[0].desc);
+
+    // function is to plug in taskObject properties into details panel
+    // first field is for project
+    let x = document.querySelector("#project-selector > select > option");
+    // x.values = "1";
+    // fill task input
+    document.querySelector("#task-input-detail").value = taskObject[0].task;
+    // fill dateDue
+    document.querySelector("#date-due > input[type=date]").value =
+      taskObject[0].dateDue;
   } else {
     // If the details container is already visible, hide it.
     querySelected.style.display = "none";

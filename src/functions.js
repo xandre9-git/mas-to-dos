@@ -7,7 +7,10 @@ import { currentTaskList } from "./dom";
 
 function currentDate() {
   const date = new Date();
-  const time = date.toLocaleTimeString("en-US", { hour12: false, timeStyle: "short" });
+  const time = date.toLocaleTimeString("en-US", {
+    hour12: false,
+    timeStyle: "short",
+  });
 
   // function to add two digit padding
   function padTo2Digits(num) {
@@ -120,7 +123,7 @@ function taskCreator(task) {
     dateCreated: new Date(),
     dateDue: currentDate().yearMonthDay,
     timeDue: currentDate().time,
-    priority: "None",
+    priority: "High",
     desc: "",
   };
   // push newly created task to correct index of projectsAndTasks in the currentTasks property
@@ -203,27 +206,68 @@ function editDetails(str) {
     querySelected.style.display = "flex";
     const taskTitle = str.textContent;
 
+    // // find the project the task belongs to
+    // const nameOfProject = projectsAndTasks.filter((project) => project.projectName)
+
     // find the object containing the task provided as an argument
     const taskObject = projectsAndTasks
       .flatMap((project) => project.currentTasks) // flatten the nested array of tasks
       .filter((task) => task.task === taskTitle); // filter the tasks by task name
     console.log(taskObject);
 
-    // task
-    console.log(taskObject[0].task);
-    // dateCreated
-    console.log(taskObject[0].dateCreated);
-    // timeDue
-    console.log(taskObject[0].timeDue);
+    const projectWithTask = projectsAndTasks
+      .map((project) => {
+        // For each project, we are going to find a task that matches the taskTitle
+        const task = project.currentTasks.find(
+          (task) => task.task === taskTitle // Check if the task's title matches the taskTitle we are looking for
+        );
+        // If we found a matching task, we create an object with the project name and the task
+        // If we didn't find a matching task, we return null
+        return task ? { projectName: project.projectName, task } : null;
+      })
+      // We filter out any null values from the array, keeping only the projects that have a matching task
+      .filter((result) => result !== null);
+
+    // Now, we check if we found any projects with a matching task
+    // If we did, we take the project name of the first project in the array
+    // If we didn't find any projects, we set the projectName to null
+    const projectName =
+      projectWithTask.length > 0 ? projectWithTask[0].projectName : null;
+
+    //project
+    // need to display all projects
+    const projectsObject = projectsAndTasks.flatMap(
+      (project) => project.projectName
+    );
+
     // priority
     console.log(taskObject[0].priority);
     // desc
     console.log(taskObject[0].desc);
 
-    // function is to plug in taskObject properties into details panel
-    // first field is for project
-    let x = document.querySelector("#project-selector > select > option");
-    // x.values = "1";
+
+    // Find the HTML element that represents the select element for project selection
+    const projectSelector = document.querySelector(
+      "#project-selector > select"
+    );
+
+    // Loop through the projectsObject list to create options for the select element
+    for (let i = 0; i < projectsObject.length; i++) {
+      // Create a new option element
+      const option = document.createElement("option");
+
+      // Set the text of the option to the project name at the current index
+      option.text = projectsObject[i];
+
+      // Check if the text of the option matches the projectName we want to select
+      if (option.text === projectName) {
+        // If there is a match, set the option as selected
+        option.selected = "selected";
+      }
+
+      // Append the option to the projectSelector select element
+      projectSelector.appendChild(option);
+    }
 
     // fill task input
     document.querySelector("#task-input-detail").value = taskObject[0].task;
@@ -233,7 +277,15 @@ function editDetails(str) {
     // fill timeDue
     document.querySelector("#time-due > input[type=time]").value =
       taskObject[0].timeDue;
-    // fill desc
+    // fill priority
+    let prioritySelect = document.querySelector("#task-priority > select");
+    const priorityOptions = prioritySelect.options;
+    for (let i = 0; i < priorityOptions.length; i++){
+      console.log(`priorityOptions[i].textContent: ${priorityOptions[i].textContent}`);
+      if (priorityOptions[i].textContent === taskObject[0].priority) {
+        priorityOptions[i].selected = "selected";
+      }
+    }
   } else {
     // If the details container is already visible, hide it.
     querySelected.style.display = "none";

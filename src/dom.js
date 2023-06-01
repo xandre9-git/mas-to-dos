@@ -183,9 +183,9 @@ const selectProject = document.createElement("select");
 projectSelectorContainer.appendChild(selectProject);
 
 // details project selector default option
-const selectNone = document.createElement("option");
-selectNone.text = "None";
-selectProject.appendChild(selectNone);
+// const selectNone = document.createElement("option");
+// selectNone.text = "My Tasks";
+// selectProject.appendChild(selectNone);
 
 // details task input container
 const taskInputContainer = document.createElement("div");

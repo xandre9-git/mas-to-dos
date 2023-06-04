@@ -25,6 +25,13 @@ function currentDate() {
   return { yearMonthDay, time };
 }
 
+// automatically resizes select options and input elements
+function fieldResizer(text) {
+  //
+  const width = text.offSetWidth + 10;
+  text.style.width = width + "px";
+}
+
 // creates projects in database
 function projectCreator() {
   // prompt user for project name
@@ -164,11 +171,19 @@ function displayTasks(project, arr, parentNode) {
   );
   // create empty array for current tasks
   const tasks = [];
+  console.log(`projectIndex: ${projectIndex}`);
 
   // extracts tasks from 'currentTasks' property of an object in the 'arr' array and pushes into the tasks array
-  Object.values(arr[projectIndex].currentTasks).forEach((e) =>
-    tasks.push(e.task)
-  );
+
+  Object.values(arr[projectIndex].currentTasks).forEach(function (e) {
+    // 
+    console.log(`Fuck!`);
+    if (arr[projectIndex].currentTasks != undefined) {
+      // run this shit
+      tasks.push(e.task);
+    }
+  });
+
   // reset the contents of the parentNode argument
   parentNode.innerHTML = "";
 
@@ -245,7 +260,6 @@ function editDetails(str) {
     // desc
     console.log(taskObject[0].desc);
 
-
     // Find the HTML element that represents the select element for project selection
     const projectSelector = document.querySelector(
       "#project-selector > select"
@@ -280,8 +294,10 @@ function editDetails(str) {
     // fill priority
     let prioritySelect = document.querySelector("#task-priority > select");
     const priorityOptions = prioritySelect.options;
-    for (let i = 0; i < priorityOptions.length; i++){
-      console.log(`priorityOptions[i].textContent: ${priorityOptions[i].textContent}`);
+    for (let i = 0; i < priorityOptions.length; i++) {
+      console.log(
+        `priorityOptions[i].textContent: ${priorityOptions[i].textContent}`
+      );
       if (priorityOptions[i].textContent === taskObject[0].priority) {
         priorityOptions[i].selected = "selected";
       }

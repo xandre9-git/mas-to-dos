@@ -15,6 +15,7 @@ h1 {
   font-size: 2rem;
 }
 
+
 #content {
   display: grid;
   grid-template-areas:
@@ -69,6 +70,10 @@ h1 {
   width: 90%;
 }
 
+#task-input-detail {
+
+}
+
 #details-container {
   /* grid-area: c; */
   background-color: rgb(20, 165, 173);
@@ -99,9 +104,14 @@ h1 {
   margin: 0.5%;
 }
 
-#details textarea {
-  /* height: 125px;
-  width: 275px; */
+#time-due > input[type=time] {
+  width: 6.5rem;
+}
+
+textarea {
+  width: 50%;
+  height: 100px;
+  resize: none;
 }
 
 #details-btn-container {

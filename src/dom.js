@@ -280,7 +280,8 @@ taskDescriptionContainer.appendChild(taskDescriptionTitle);
 // details description textarea
 const taskDescription = document.createElement("textarea");
 taskDescription.id = "task-description";
-taskDescription.placeholder = "Enter description of task.";
+taskDescription.placeholder = "Enter description of task (Maximum of 280 characters).";
+taskDescription.maxLength = 280;
 taskDescriptionContainer.appendChild(taskDescription);
 
 // details buttons container

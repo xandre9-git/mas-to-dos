@@ -26,10 +26,19 @@ function currentDate() {
 }
 
 // automatically resizes select options and input elements
-function fieldResizer(text) {
-  //
-  const width = text.offSetWidth + 10;
-  text.style.width = width + "px";
+function resizeInput() {
+  let input = document.querySelector("#task-input-detail"); // Get the input element with the id "task-input-detail"
+  let textWidth = getTextWidth(input.value, getComputedStyle(input).font); // Get the width of the input value
+  input.style.width = textWidth + "px"; // Set the width of the input element to the calculated text width
+}
+
+function getTextWidth(text, font) {
+  let canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
+  let context = canvas.getContext("2d");
+  context.font = font;
+  let metrics = context.measureText(text)
+  return metrics.width;
+
 }
 
 // creates projects in database
@@ -175,14 +184,23 @@ function displayTasks(project, arr, parentNode) {
 
   // extracts tasks from 'currentTasks' property of an object in the 'arr' array and pushes into the tasks array
 
-  Object.values(arr[projectIndex].currentTasks).forEach(function (e) {
-    // 
-    console.log(`Fuck!`);
-    if (arr[projectIndex].currentTasks != undefined) {
-      // run this shit
-      tasks.push(e.task);
-    }
-  });
+
+  if (projectIndex != -1) {
+    Object.values(arr[projectIndex].currentTasks).forEach(function (e) {
+
+      if (arr[projectIndex].currentTasks != undefined) {
+        // run this shit
+        tasks.push(e.task);
+      }
+    });
+  }
+  // Object.values(arr[projectIndex].currentTasks).forEach(function (e) {
+
+  //   if (arr[projectIndex].currentTasks != undefined) {
+  //     // run this shit
+  //     tasks.push(e.task);
+  //   }
+  // });
 
   // reset the contents of the parentNode argument
   parentNode.innerHTML = "";
@@ -285,6 +303,7 @@ function editDetails(str) {
 
     // fill task input
     document.querySelector("#task-input-detail").value = taskObject[0].task;
+    resizeInput();
     // fill dateDue
     document.querySelector("#date-due > input[type=date]").value =
       taskObject[0].dateDue;

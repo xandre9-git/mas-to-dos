@@ -33,12 +33,13 @@ function resizeInput() {
 }
 
 function getTextWidth(text, font) {
-  let canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
+  let canvas =
+    getTextWidth.canvas ||
+    (getTextWidth.canvas = document.createElement("canvas"));
   let context = canvas.getContext("2d");
   context.font = font;
-  let metrics = context.measureText(text)
+  let metrics = context.measureText(text);
   return metrics.width;
-
 }
 
 // creates projects in database
@@ -184,10 +185,8 @@ function displayTasks(project, arr, parentNode) {
 
   // extracts tasks from 'currentTasks' property of an object in the 'arr' array and pushes into the tasks array
 
-
   if (projectIndex != -1) {
     Object.values(arr[projectIndex].currentTasks).forEach(function (e) {
-
       if (arr[projectIndex].currentTasks != undefined) {
         // run this shit
         tasks.push(e.task);
@@ -283,22 +282,26 @@ function editDetails(str) {
       "#project-selector > select"
     );
 
-    // Loop through the projectsObject list to create options for the select element
-    for (let i = 0; i < projectsObject.length; i++) {
-      // Create a new option element
-      const option = document.createElement("option");
+    // CODE BELOW NEEDS TO ONLY EXECUTE IF FIELD IS NOT ALREADY POPULATED
 
-      // Set the text of the option to the project name at the current index
-      option.text = projectsObject[i];
+    if (projectSelector.className != "filled") {
+      // Loop through the projectsObject list to create options for the select element
+      for (let i = 0; i < projectsObject.length; i++) {
+        // Create a new option element
+        const option = document.createElement("option");
 
-      // Check if the text of the option matches the projectName we want to select
-      if (option.text === projectName) {
-        // If there is a match, set the option as selected
-        option.selected = "selected";
+        // Set the text of the option to the project name at the current index
+        option.text = projectsObject[i];
+
+        // Check if the text of the option matches the projectName we want to select
+        if (option.text === projectName) {
+          // If there is a match, set the option as selected
+          option.selected = "selected";
+        }
+        projectSelector.classList.add("filled");
+        // Append the option to the projectSelector select element
+        projectSelector.appendChild(option);
       }
-
-      // Append the option to the projectSelector select element
-      projectSelector.appendChild(option);
     }
 
     // fill task input

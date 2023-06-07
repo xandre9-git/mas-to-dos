@@ -7,7 +7,7 @@ import { activeProject } from "./functions";
 import { displayTasks } from "./functions";
 import { taskClicked } from "./functions";
 import { taskCreator } from "./functions";
-import { resizeInput } from "./functions";
+import { saveDetails } from "./functions";
 
 // main container for the app
 const body = document.getElementById("content");
@@ -202,9 +202,6 @@ taskInputContainer.appendChild(taskInputTitle);
 const taskInput = document.createElement("input");
 taskInput.id = "task-input-detail";
 taskInput.value = "Placeholder";
-taskInput.addEventListener("oninput", function(){
-  resizeInput();
-})
 taskInputContainer.appendChild(taskInput);
 
 // details date due container
@@ -297,6 +294,9 @@ details.appendChild(detailsBtnContainer);
 const detailsSaveBtn = document.createElement("div");
 detailsSaveBtn.id = "save-btn";
 detailsSaveBtn.title = "Save Changes";
+detailsSaveBtn.addEventListener("click", function(){
+  saveDetails();
+})
 detailsBtnContainer.appendChild(detailsSaveBtn);
 
 // details cancel btn

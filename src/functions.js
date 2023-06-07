@@ -160,18 +160,20 @@ let prevTask = null;
 const taskClicked = (e) => {
   // check to see if element clicked is a <li> (list item)
   if (e.target.nodeName === "LI") {
-    editDetails(e.target);
     // add .active class to element clicked
     e.target.classList.add("active-task");
-    // check to see if there is a previous project that was active
+ 
 
+    // check to see if there is a previous project that was active
     if (prevTask !== null) {
       // removes active class from the element
+
       prevTask.classList.remove("active-task");
     }
     // set prevTask as the clicked HTMLIElement
     prevTask = e.target;
   }
+  editDetails(e.target);
 };
 
 function displayTasks(project, arr, parentNode) {
@@ -193,13 +195,6 @@ function displayTasks(project, arr, parentNode) {
       }
     });
   }
-  // Object.values(arr[projectIndex].currentTasks).forEach(function (e) {
-
-  //   if (arr[projectIndex].currentTasks != undefined) {
-  //     // run this shit
-  //     tasks.push(e.task);
-  //   }
-  // });
 
   // reset the contents of the parentNode argument
   parentNode.innerHTML = "";
@@ -232,14 +227,15 @@ function displayTasks(project, arr, parentNode) {
 function editDetails(str) {
   // Get the details container element.
   const querySelected = document.getElementById("details-container");
+  querySelected.style.display = "flex";
+
+  // fuck?
+  const showOrHide = document.getElementsByClassName("active-task")
+  // console.log(`showOrHide[0]: ${showOrHide[0].className}`);
 
   // If the details container is not visible, show it.
-  if (querySelected.style.display === "none") {
-    querySelected.style.display = "flex";
+  if (showOrHide.length > 0) {
     const taskTitle = str.textContent;
-
-    // // find the project the task belongs to
-    // const nameOfProject = projectsAndTasks.filter((project) => project.projectName)
 
     // find the object containing the task provided as an argument
     const taskObject = projectsAndTasks
@@ -282,8 +278,7 @@ function editDetails(str) {
       "#project-selector > select"
     );
 
-    // CODE BELOW NEEDS TO ONLY EXECUTE IF FIELD IS NOT ALREADY POPULATED
-
+    // check to see if projectSelector does not have options already filled in
     if (projectSelector.className != "filled") {
       // Loop through the projectsObject list to create options for the select element
       for (let i = 0; i < projectsObject.length; i++) {
@@ -324,8 +319,12 @@ function editDetails(str) {
         priorityOptions[i].selected = "selected";
       }
     }
-  } else {
-    // If the details container is already visible, hide it.
+    console.log(`showOrHide.length: ${showOrHide.length}`);
+  } else if (showOrHide.length == 0){
+    // If the details container is already visible and the same task is clicked, hide it.
+    // how do i do that?
+    // document.getElementsByClassName("active-task")
+    console.log(`Fuck?`);
     querySelected.style.display = "none";
   }
 }

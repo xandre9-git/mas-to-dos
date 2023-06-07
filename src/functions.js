@@ -155,24 +155,26 @@ function taskCreator(task) {
 }
 
 // variable to select specific project
-let prevTask = null;
+let prevTask = null; // declare prevTask at a higher scope level
 
 const taskClicked = (e) => {
-  // check to see if element clicked is a <li> (list item)
-  if (e.target.nodeName === "LI") {
-    // add .active class to element clicked
-    e.target.classList.add("active-task");
- 
-
-    // check to see if there is a previous project that was active
-    if (prevTask !== null) {
-      // removes active class from the element
-
-      prevTask.classList.remove("active-task");
-    }
-    // set prevTask as the clicked HTMLIElement
-    prevTask = e.target;
+  // explain this...
+  // check to see if task clicked has active-task as a class name
+  if (e.target.className == "task-list-item active-task") {
+    // reload the page so new applications of editDetails() can run
+    window.location.reload();
   }
+
+  if (e.target.nodeName === "LI") {
+    e.target.classList.add("active-task");
+    if (prevTask !== null) {
+      prevTask.classList.remove("active-task");
+      // well, shit.
+    }
+    prevTask = e.target;
+    console.log(prevTask.textContent);
+  }
+
   editDetails(e.target);
 };
 
@@ -225,15 +227,14 @@ function displayTasks(project, arr, parentNode) {
 }
 
 function editDetails(str) {
-  // Get the details container element.
+  // Get the details container element and set it to flex
   const querySelected = document.getElementById("details-container");
   querySelected.style.display = "flex";
 
-  // fuck?
-  const showOrHide = document.getElementsByClassName("active-task")
-  // console.log(`showOrHide[0]: ${showOrHide[0].className}`);
+  // create variable to grab task with .active-task class name
+  const showOrHide = document.getElementsByClassName("active-task");
 
-  // If the details container is not visible, show it.
+  // If there is an active task, show the details panel
   if (showOrHide.length > 0) {
     const taskTitle = str.textContent;
 
@@ -241,7 +242,6 @@ function editDetails(str) {
     const taskObject = projectsAndTasks
       .flatMap((project) => project.currentTasks) // flatten the nested array of tasks
       .filter((task) => task.task === taskTitle); // filter the tasks by task name
-    console.log(taskObject);
 
     const projectWithTask = projectsAndTasks
       .map((project) => {
@@ -269,9 +269,9 @@ function editDetails(str) {
     );
 
     // priority
-    console.log(taskObject[0].priority);
+    // console.log(taskObject[0].priority);
     // desc
-    console.log(taskObject[0].desc);
+    // console.log(taskObject[0].desc);
 
     // Find the HTML element that represents the select element for project selection
     const projectSelector = document.querySelector(
@@ -300,7 +300,8 @@ function editDetails(str) {
     }
 
     // fill task input
-    document.querySelector("#task-input-detail").value = taskObject[0].task;
+    let input = document.querySelector("#task-input-detail")
+    input.value = taskObject[0].task;
     resizeInput();
     // fill dateDue
     document.querySelector("#date-due > input[type=date]").value =
@@ -319,14 +320,14 @@ function editDetails(str) {
         priorityOptions[i].selected = "selected";
       }
     }
-    console.log(`showOrHide.length: ${showOrHide.length}`);
-  } else if (showOrHide.length == 0){
-    // If the details container is already visible and the same task is clicked, hide it.
-    // how do i do that?
-    // document.getElementsByClassName("active-task")
-    console.log(`Fuck?`);
+  } else if (showOrHide.length == 0) {
     querySelected.style.display = "none";
   }
+}
+
+function saveDetails(){
+  // okay...
+  console.log(`The start...`);
 }
 
 // exports
@@ -338,3 +339,4 @@ export { prevProject };
 export { displayTasks };
 export { taskCreator };
 export { taskClicked };
+export { saveDetails };

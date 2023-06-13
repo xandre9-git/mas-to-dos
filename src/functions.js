@@ -270,8 +270,6 @@ function editDetails(str) {
 
     // priority
     // console.log(taskObject[0].priority);
-    // desc
-    // console.log(taskObject[0].desc);
 
     // Find the HTML element that represents the select element for project selection
     const projectSelector = document.querySelector(
@@ -298,18 +296,8 @@ function editDetails(str) {
         projectSelector.appendChild(option);
       }
     }
-
-    // fill task input
-    let input = document.querySelector("#task-input-detail")
-    input.value = taskObject[0].task;
-    resizeInput();
-    // fill dateDue
-    document.querySelector("#date-due > input[type=date]").value =
-      taskObject[0].dateDue;
-    // fill timeDue
-    document.querySelector("#time-due > input[type=time]").value =
-      taskObject[0].timeDue;
-    // fill priority
+    
+    // options for priority select element
     let prioritySelect = document.querySelector("#task-priority > select");
     const priorityOptions = prioritySelect.options;
     for (let i = 0; i < priorityOptions.length; i++) {
@@ -320,14 +308,66 @@ function editDetails(str) {
         priorityOptions[i].selected = "selected";
       }
     }
+
+    // OBJECT DATA
+
+    // task
+    let task = document.querySelector("#task-input-detail");
+    task.value = taskObject[0].task;
+    resizeInput();
+
+    // dateCreated
+    let dateCreated = taskObject[0].dateCreated;
+
+    // dateDue
+    let dateDue = document.querySelector("#date-due > input[type=date]");
+    dateDue.value = taskObject[0].dateDue;
+
+    // timeDue
+    let timeDue = document.querySelector("#time-due > input[type=time]");
+    timeDue.value = taskObject[0].timeDue;
+
+    // priority
+    let priority = document.querySelector("#task-priority > select");
+    priority.value = taskObject[0].priority;
+
+    // desc
+    let desc = document.querySelector("#task-description");
+    desc.value = taskObject[0].desc;
+
+  // saveDetails("Odin", task.value, dateCreated.value, dateDue.value, timeDue.value, priority.value, desc.value);
+  let saveBtn = document.querySelector("#save-btn");
+  saveBtn.addEventListener("click", function(){
+    saveDetails(projectName, task.value, dateCreated, dateDue.value, timeDue.value, priority.value, desc.value);
+  })
+
   } else if (showOrHide.length == 0) {
     querySelected.style.display = "none";
   }
 }
 
-function saveDetails(){
+function saveDetails(
+  project,
+  task,
+  dateCreated,
+  dateDue,
+  timeDue,
+  priority,
+  desc
+) {
   // okay...
-  console.log(`The start...`);
+
+  // needs to take all the modifications from details panel and update in projectTasks array
+  // lets fucking go!
+  // find the project name and save object to it
+
+  // get the values of the inputs and save them in variables
+  // create a new object or update existing object?
+  // how do I find the existing object?
+  // find object that has the same dateCreated
+  console.log(project, task, dateCreated, dateDue, timeDue, priority, desc);
+  // console.log(task);
+
 }
 
 // exports

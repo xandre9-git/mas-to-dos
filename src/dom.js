@@ -183,11 +183,6 @@ projectSelectorContainer.appendChild(selectProjectTitle);
 const selectProject = document.createElement("select");
 projectSelectorContainer.appendChild(selectProject);
 
-// details project selector default option
-// const selectNone = document.createElement("option");
-// selectNone.text = "My Tasks";
-// selectProject.appendChild(selectNone);
-
 // details task input container
 const taskInputContainer = document.createElement("div");
 taskInputContainer.id = "edit-task-name";
@@ -294,9 +289,9 @@ details.appendChild(detailsBtnContainer);
 const detailsSaveBtn = document.createElement("div");
 detailsSaveBtn.id = "save-btn";
 detailsSaveBtn.title = "Save Changes";
-detailsSaveBtn.addEventListener("click", function(){
-  saveDetails();
-})
+// detailsSaveBtn.addEventListener("click", function(){
+//   saveDetails("Odin", "Test");
+// })
 detailsBtnContainer.appendChild(detailsSaveBtn);
 
 // details cancel btn

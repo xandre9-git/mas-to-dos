@@ -275,7 +275,7 @@ taskDescriptionContainer.appendChild(taskDescriptionTitle);
 
 // details description textarea
 const taskDescription = document.createElement("textarea");
-taskDescription.id = "task-description";
+taskDescription.id = "task-description-textarea";
 taskDescription.placeholder = "Enter description of task (Maximum of 280 characters).";
 taskDescription.maxLength = 280;
 taskDescriptionContainer.appendChild(taskDescription);
@@ -289,9 +289,6 @@ details.appendChild(detailsBtnContainer);
 const detailsSaveBtn = document.createElement("div");
 detailsSaveBtn.id = "save-btn";
 detailsSaveBtn.title = "Save Changes";
-// detailsSaveBtn.addEventListener("click", function(){
-//   saveDetails("Odin", "Test");
-// })
 detailsBtnContainer.appendChild(detailsSaveBtn);
 
 // details cancel btn

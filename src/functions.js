@@ -296,7 +296,7 @@ function editDetails(str) {
         projectSelector.appendChild(option);
       }
     }
-    
+
     // options for priority select element
     let prioritySelect = document.querySelector("#task-priority > select");
     const priorityOptions = prioritySelect.options;
@@ -332,15 +332,23 @@ function editDetails(str) {
     priority.value = taskObject[0].priority;
 
     // desc
-    let desc = document.querySelector("#task-description");
+    let desc = document.querySelector("#task-description-textarea");
     desc.value = taskObject[0].desc;
 
-  // saveDetails("Odin", task.value, dateCreated.value, dateDue.value, timeDue.value, priority.value, desc.value);
-  let saveBtn = document.querySelector("#save-btn");
-  saveBtn.addEventListener("click", function(){
-    saveDetails(projectName, task.value, dateCreated, dateDue.value, timeDue.value, priority.value, desc.value);
-  })
-
+    let saveBtn = document.querySelector("#save-btn");
+    saveBtn.addEventListener("click", function () {
+      console.log(`projectSelector: ${projectSelector.value}`);
+      saveDetails(
+        projectSelector.value,
+        task.value,
+        dateCreated,
+        dateDue.value,
+        timeDue.value,
+        priority.value,
+        desc.value,
+        projectName
+      );
+    });
   } else if (showOrHide.length == 0) {
     querySelected.style.display = "none";
   }
@@ -353,21 +361,32 @@ function saveDetails(
   dateDue,
   timeDue,
   priority,
-  desc
+  desc,
+  projectName
 ) {
   // okay...
-
   // needs to take all the modifications from details panel and update in projectTasks array
   // lets fucking go!
-  // find the project name and save object to it
 
   // get the values of the inputs and save them in variables
+  console.log(
+    `project: ${project}, task: ${task}, dateCreated: ${dateCreated}, dateDue: ${dateDue}, timeDue: ${timeDue}, priority: ${priority}, desc: ${desc}`
+  );
+
+  // check to see if the project name is the same
+  console.log(`projectName: ${projectName}`)
+  if (project == projectName) {
+    // find project in projectsAndTask array
+    // console.log(`projectsAndTasks: ${projectsAndTasks.findIndex((e) => e.projectName == project)}`);
+    const projectIndex = projectsAndTasks.findIndex((e) => e.projectName == project);
+    console.log(projectsAndTasks[projectIndex].projectName)
+  }
+
   // create a new object or update existing object?
   // how do I find the existing object?
   // find object that has the same dateCreated
-  console.log(project, task, dateCreated, dateDue, timeDue, priority, desc);
-  // console.log(task);
 
+  // find the project in the database
 }
 
 // exports

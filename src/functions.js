@@ -400,24 +400,61 @@ function saveDetails(
     );
 
     // find the task in the array
-    // const taskIndex = projectsAndTasks[projectIndex].currentTasks.findIndex((e) => e.task == task)
-    // console.log(`taskIndex: ${taskIndex}`);
-    // console.log(`projectsAndTasks[projectIndex].currentTasks[taskIndex].task: ${projectsAndTasks[projectIndex].currentTasks[taskIndex].task}`);
+    // this is provided by originalTaskIndex argument
 
-    // what if the task is renamed? task should be updated in the same location with new name.
-    // projectsAndTasks[projectIndex].currentTasks[originalTaskIndex].task =
-    //   "Test string.";
+    // update the , date due, time due, priority, and description in the array
     projectsAndTasks[projectIndex].currentTasks[originalTaskIndex].task = task;
-    console.log(
-      `projectsAndTasks[projectIndex].currentTasks[originalTaskIndex].task: ${projectsAndTasks[projectIndex].currentTasks[originalTaskIndex].task}`
-    );
+    projectsAndTasks[projectIndex].currentTasks[originalTaskIndex].dateDue =
+      dateDue;
+    projectsAndTasks[projectIndex].currentTasks[originalTaskIndex].timeDue =
+      timeDue;
+    projectsAndTasks[projectIndex].currentTasks[originalTaskIndex].priority =
+      priority;
+    projectsAndTasks[projectIndex].currentTasks[originalTaskIndex].desc = desc;
+
+    // update the localStorage
     localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
-    console.log(`projectsAndTasks: ${projectsAndTasks}`);
-    // projectsAndTasks.push({
-    //   projectName: projectName,
-    //   currentTasks: [],
-    //   completedTasks: [],
-    // })
+  } else {
+    // if project selected is different than task's original project...
+    console.log(`Thotties.`);
+    // make sure to get original project name index for later deletion
+    const oldProjectIndex = projectsAndTasks.findIndex(
+      (e) => e.projectName == projectName
+    );
+    console.log(oldProjectIndex);
+
+    // find out the name of the new project
+    console.log(`new project selected: ${project}`);
+    // find out the index of the projectName in projectsAndTasks that matches `project`
+    const newProjectIndex = projectsAndTasks.findIndex(
+      (e) => e.projectName == project
+    );
+
+    console.log(newProjectIndex);
+    console.log(
+      `projectsAndTasks[newProjectIndex].projectName: ${projectsAndTasks[newProjectIndex].projectName}`
+    );
+    // now target that projectName's currentTasks and add new object data with task information. (it also needs to delete the task information from the previous project that it was in)
+
+    // create newTask object to later push to projectsAndTasks array
+    let newTask = {
+      task: task,
+      dateCreated: new Date(),
+      dateDue: dateDue,
+      timeDue: timeDue,
+      priority: priority,
+      desc: desc,
+    };
+    // push newly created task to correct index of projectsAndTasks in the currentTasks property
+    projectsAndTasks[newProjectIndex].currentTasks.push(newTask);
+    // delete the old current task
+    projectsAndTasks[oldProjectIndex].currentTasks.splice(originalTaskIndex, 1);
+    console.log(
+      `projectsAndTasks[oldProjectIndex].currentTasks[originalTaskIndex]: ${projectsAndTasks[oldProjectIndex]}`
+    );
+
+    // update the localStorage
+    localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
   }
 
   // create a new object or update existing object?

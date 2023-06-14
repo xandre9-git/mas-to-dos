@@ -311,10 +311,22 @@ function editDetails(str) {
 
     // OBJECT DATA
 
+    // project
+    const projectIndex = projectsAndTasks.findIndex(
+      (e) => e.projectName == projectName
+    );
+    console.log(
+      `projectsAndTasks[projectIndex].projectName: ${projectsAndTasks[projectIndex].projectName}`
+    );
+
     // task
     let task = document.querySelector("#task-input-detail");
     task.value = taskObject[0].task;
     resizeInput();
+    const taskIndex = projectsAndTasks[projectIndex].currentTasks.findIndex(
+      (e) => e.task == task.value
+    );
+    console.log(`taskIndex: ${taskIndex}`);
 
     // dateCreated
     let dateCreated = taskObject[0].dateCreated;
@@ -346,7 +358,8 @@ function editDetails(str) {
         timeDue.value,
         priority.value,
         desc.value,
-        projectName
+        projectName,
+        taskIndex
       );
     });
   } else if (showOrHide.length == 0) {
@@ -362,7 +375,8 @@ function saveDetails(
   timeDue,
   priority,
   desc,
-  projectName
+  projectName,
+  originalTaskIndex
 ) {
   // okay...
   // needs to take all the modifications from details panel and update in projectTasks array
@@ -374,12 +388,36 @@ function saveDetails(
   );
 
   // check to see if the project name is the same
-  console.log(`projectName: ${projectName}`)
+  console.log(`projectName: ${projectName}`);
+  // so far this is for tasks that have not had their project changed.
   if (project == projectName) {
     // find project in projectsAndTask array
-    // console.log(`projectsAndTasks: ${projectsAndTasks.findIndex((e) => e.projectName == project)}`);
-    const projectIndex = projectsAndTasks.findIndex((e) => e.projectName == project);
-    console.log(projectsAndTasks[projectIndex].projectName)
+    const projectIndex = projectsAndTasks.findIndex(
+      (e) => e.projectName == project
+    );
+    console.log(
+      `projectsAndTasks[projectIndex].projectName: ${projectsAndTasks[projectIndex].projectName}`
+    );
+
+    // find the task in the array
+    // const taskIndex = projectsAndTasks[projectIndex].currentTasks.findIndex((e) => e.task == task)
+    // console.log(`taskIndex: ${taskIndex}`);
+    // console.log(`projectsAndTasks[projectIndex].currentTasks[taskIndex].task: ${projectsAndTasks[projectIndex].currentTasks[taskIndex].task}`);
+
+    // what if the task is renamed? task should be updated in the same location with new name.
+    // projectsAndTasks[projectIndex].currentTasks[originalTaskIndex].task =
+    //   "Test string.";
+    projectsAndTasks[projectIndex].currentTasks[originalTaskIndex].task = task;
+    console.log(
+      `projectsAndTasks[projectIndex].currentTasks[originalTaskIndex].task: ${projectsAndTasks[projectIndex].currentTasks[originalTaskIndex].task}`
+    );
+    localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
+    console.log(`projectsAndTasks: ${projectsAndTasks}`);
+    // projectsAndTasks.push({
+    //   projectName: projectName,
+    //   currentTasks: [],
+    //   completedTasks: [],
+    // })
   }
 
   // create a new object or update existing object?
@@ -387,6 +425,7 @@ function saveDetails(
   // find object that has the same dateCreated
 
   // find the project in the database
+  location.reload();
 }
 
 // exports

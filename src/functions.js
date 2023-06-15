@@ -268,9 +268,6 @@ function editDetails(str) {
       (project) => project.projectName
     );
 
-    // priority
-    // console.log(taskObject[0].priority);
-
     // Find the HTML element that represents the select element for project selection
     const projectSelector = document.querySelector(
       "#project-selector > select"
@@ -315,9 +312,6 @@ function editDetails(str) {
     const projectIndex = projectsAndTasks.findIndex(
       (e) => e.projectName === projectName
     );
-    console.log(
-      `projectsAndTasks[projectIndex].projectName: ${projectsAndTasks[projectIndex].projectName}`
-    );
 
     // task
     let task = document.querySelector("#task-input-detail");
@@ -326,7 +320,6 @@ function editDetails(str) {
     const taskIndex = projectsAndTasks[projectIndex].currentTasks.findIndex(
       (e) => e.task === task.value
     );
-    console.log(`taskIndex: ${taskIndex}`);
 
     // dateCreated
     let dateCreated = taskObject[0].dateCreated;
@@ -347,9 +340,9 @@ function editDetails(str) {
     let desc = document.querySelector("#task-description-textarea");
     desc.value = taskObject[0].desc;
 
+    // save button event listener
     let saveBtn = document.querySelector("#save-btn");
     saveBtn.addEventListener("click", function () {
-      console.log(`projectSelector: ${projectSelector.value}`);
       saveDetails(
         projectSelector.value,
         task.value,
@@ -362,6 +355,13 @@ function editDetails(str) {
         taskIndex
       );
     });
+
+    // delete btn event listener
+    let deleteBtn = document.querySelector("#delete-btn");
+    deleteBtn.addEventListener("click", function(){
+      deleteDetails(projectIndex, taskIndex);
+    })
+
   } else if (showOrHide.length === 0) {
     querySelected.style.display = "none";
   }
@@ -432,6 +432,27 @@ function saveDetails(
   location.reload();
 }
 
+function cancelDetails() {
+  const querySelected = document.getElementById("details-container");
+  querySelected.style.display = "none";
+}
+
+function deleteDetails(projectIndex, taskIndex) {
+  console.log(`First of all...`)
+  let deleteConfirmation = prompt(`Are you sure you would like to delete task: ${projectsAndTasks[projectIndex].currentTasks[taskIndex].task}? (y/n)`)
+  if (deleteConfirmation === "y"){
+    console.log(`projectsAndTasks[projectIndex].currentTasks[taskIndex]: ${projectsAndTasks[projectIndex].currentTasks[taskIndex]}`);
+    projectsAndTasks[projectIndex].currentTasks.splice(taskIndex, 1);
+    console.log(`projectsAndTasks[projectIndex].currentTasks[taskIndex]: ${projectsAndTasks[projectIndex].currentTasks[taskIndex]}`);
+    // update the localStorage
+    localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
+    location.reload();
+  } else {
+    return;
+  }
+
+}
+
 // exports
 export { projectCreator };
 export { displayProjects };
@@ -442,3 +463,4 @@ export { displayTasks };
 export { taskCreator };
 export { taskClicked };
 export { saveDetails };
+export { cancelDetails };

@@ -7,7 +7,7 @@ import { activeProject } from "./functions";
 import { displayTasks } from "./functions";
 import { taskClicked } from "./functions";
 import { taskCreator } from "./functions";
-import { saveDetails } from "./functions";
+import { cancelDetails } from "./functions";
 
 // main container for the app
 const body = document.getElementById("content");
@@ -295,6 +295,9 @@ detailsBtnContainer.appendChild(detailsSaveBtn);
 const detailsCancelBtn = document.createElement("div");
 detailsCancelBtn.id = "cancel-btn";
 detailsCancelBtn.title = "Cancel Changes";
+detailsCancelBtn.addEventListener("click", function(){
+  cancelDetails();
+})
 detailsBtnContainer.appendChild(detailsCancelBtn);
 
 // details delete btn
@@ -302,14 +305,12 @@ const detailsDeleteBtn = document.createElement("div");
 detailsDeleteBtn.id = "delete-btn";
 detailsDeleteBtn.title = "Delete Task";
 detailsBtnContainer.appendChild(detailsDeleteBtn);
-
 todoBoardsContainer.appendChild(detailsContainer);
 
 // dom #content appends
 body.appendChild(topBar);
 body.appendChild(leftSideBar);
 body.appendChild(todoBoardsContainer);
-
 
 export { body };
 export { currentTaskList };

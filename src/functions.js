@@ -313,7 +313,7 @@ function editDetails(str) {
 
     // project
     const projectIndex = projectsAndTasks.findIndex(
-      (e) => e.projectName == projectName
+      (e) => e.projectName === projectName
     );
     console.log(
       `projectsAndTasks[projectIndex].projectName: ${projectsAndTasks[projectIndex].projectName}`
@@ -324,7 +324,7 @@ function editDetails(str) {
     task.value = taskObject[0].task;
     resizeInput();
     const taskIndex = projectsAndTasks[projectIndex].currentTasks.findIndex(
-      (e) => e.task == task.value
+      (e) => e.task === task.value
     );
     console.log(`taskIndex: ${taskIndex}`);
 
@@ -362,7 +362,7 @@ function editDetails(str) {
         taskIndex
       );
     });
-  } else if (showOrHide.length == 0) {
+  } else if (showOrHide.length === 0) {
     querySelected.style.display = "none";
   }
 }
@@ -378,29 +378,12 @@ function saveDetails(
   projectName,
   originalTaskIndex
 ) {
-  // okay...
-  // needs to take all the modifications from details panel and update in projectTasks array
-  // lets fucking go!
-
-  // get the values of the inputs and save them in variables
-  console.log(
-    `project: ${project}, task: ${task}, dateCreated: ${dateCreated}, dateDue: ${dateDue}, timeDue: ${timeDue}, priority: ${priority}, desc: ${desc}`
-  );
-
-  // check to see if the project name is the same
-  console.log(`projectName: ${projectName}`);
-  // so far this is for tasks that have not had their project changed.
-  if (project == projectName) {
+  // section for tasks that have not had their project changed
+  if (project === projectName) {
     // find project in projectsAndTask array
     const projectIndex = projectsAndTasks.findIndex(
-      (e) => e.projectName == project
+      (e) => e.projectName === project
     );
-    console.log(
-      `projectsAndTasks[projectIndex].projectName: ${projectsAndTasks[projectIndex].projectName}`
-    );
-
-    // find the task in the array
-    // this is provided by originalTaskIndex argument
 
     // update the , date due, time due, priority, and description in the array
     projectsAndTasks[projectIndex].currentTasks[originalTaskIndex].task = task;
@@ -416,25 +399,15 @@ function saveDetails(
     localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
   } else {
     // if project selected is different than task's original project...
-    console.log(`Thotties.`);
     // make sure to get original project name index for later deletion
     const oldProjectIndex = projectsAndTasks.findIndex(
-      (e) => e.projectName == projectName
+      (e) => e.projectName === projectName
     );
-    console.log(oldProjectIndex);
 
-    // find out the name of the new project
-    console.log(`new project selected: ${project}`);
-    // find out the index of the projectName in projectsAndTasks that matches `project`
+    // find out the index of the projectName in projectsAndTasks that matches `project` (the new project selected's name)
     const newProjectIndex = projectsAndTasks.findIndex(
-      (e) => e.projectName == project
+      (e) => e.projectName === project
     );
-
-    console.log(newProjectIndex);
-    console.log(
-      `projectsAndTasks[newProjectIndex].projectName: ${projectsAndTasks[newProjectIndex].projectName}`
-    );
-    // now target that projectName's currentTasks and add new object data with task information. (it also needs to delete the task information from the previous project that it was in)
 
     // create newTask object to later push to projectsAndTasks array
     let newTask = {
@@ -447,21 +420,15 @@ function saveDetails(
     };
     // push newly created task to correct index of projectsAndTasks in the currentTasks property
     projectsAndTasks[newProjectIndex].currentTasks.push(newTask);
+
     // delete the old current task
     projectsAndTasks[oldProjectIndex].currentTasks.splice(originalTaskIndex, 1);
-    console.log(
-      `projectsAndTasks[oldProjectIndex].currentTasks[originalTaskIndex]: ${projectsAndTasks[oldProjectIndex]}`
-    );
 
     // update the localStorage
     localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
   }
 
-  // create a new object or update existing object?
-  // how do I find the existing object?
-  // find object that has the same dateCreated
-
-  // find the project in the database
+  // reload the page
   location.reload();
 }
 

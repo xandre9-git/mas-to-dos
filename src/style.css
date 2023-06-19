@@ -143,6 +143,8 @@ textarea {
   color: white;
   font-size: 1.5em;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
 }
 
 .added-projects:hover {
@@ -175,8 +177,50 @@ textarea {
     brightness(100%) contrast(102%);
 }
 
+.filter-orange {
+  filter: invert(100%) sepia(66%) saturate(7005%) hue-rotate(315deg) brightness(107%) contrast(105%)
+}
+
 .active-project {
   color: #ffdb58;
+}
+
+.project-action-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-edit-btn {
+  height: 24px;
+  width: 24px;
+  background-size: 100% 100%; 
+}
+
+.project-edit-btn:hover {
+  filter: invert(100%) sepia(66%) saturate(7005%) hue-rotate(315deg) brightness(107%) contrast(105%)
+}
+
+.project-delete-btn {
+  height: 24px;
+  width: 24px;
+  background-size: 100% 100%;
+}
+
+.project-delete-btn:hover {
+  filter: invert(100%) sepia(66%) saturate(7005%) hue-rotate(315deg) brightness(107%) contrast(105%)
+}
+
+.proj-edit-hovered {
+  background-image: url(./images/edit.svg);
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(125deg)
+  brightness(100%) contrast(102%);
+}
+
+.proj-del-hovered {
+  background-image: url(./images/delete.svg);
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(125deg)
+  brightness(100%) contrast(102%);
 }
 
 .task-list-item-container {

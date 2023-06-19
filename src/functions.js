@@ -69,6 +69,16 @@ function projectCreator() {
   location.reload();
 }
 
+// function to delete projects
+function deleteProject(e){
+  // code here 
+}
+
+// function to rename projects
+function renameProject(){
+  // code here
+}
+
 // variable to select specific project
 const activeProjectLocalStorage = window.localStorage.getItem("activeProject");
 let prevProject = null;
@@ -117,6 +127,34 @@ function displayProjects(arr, parentNode) {
       // use above variable as arg for displayTasks()
       displayTasks(project, projectsAndTasks, currentTaskList);
     });
+    // project action button container
+    const projectActionBtnContainer = document.createElement("div");
+    projectActionBtnContainer.className = "project-action-btn-container";
+    
+    // project rename button
+    const projectEditBtn = document.createElement("div");
+    projectEditBtn.title = "Rename Project";
+    projectEditBtn.className = "project-edit-btn";
+    
+    // project deletion button
+    const projectDeleteBtn = document.createElement("div");
+    projectDeleteBtn.title = "Delete Project";
+    projectDeleteBtn.className = "project-delete-btn";
+    
+    // append project action buttons
+    projectActionBtnContainer.appendChild(projectEditBtn);
+    projectActionBtnContainer.appendChild(projectDeleteBtn);
+    addProject.appendChild(projectActionBtnContainer);
+
+    // mouse in and out event listeners for hover color change status
+    addProject.addEventListener("mouseenter", () =>{
+      projectEditBtn.classList.add("proj-edit-hovered");
+      projectDeleteBtn.classList.add("proj-del-hovered");
+    })
+    addProject.addEventListener("mouseleave", () =>{
+      projectEditBtn.classList.remove("proj-edit-hovered");
+      projectDeleteBtn.classList.remove("proj-del-hovered");
+    })
     // append newly added project to specified node
     parentNode.appendChild(addProject);
   }
@@ -438,12 +476,9 @@ function cancelDetails() {
 }
 
 function deleteDetails(projectIndex, taskIndex) {
-  console.log(`First of all...`)
   let deleteConfirmation = prompt(`Are you sure you would like to delete task: ${projectsAndTasks[projectIndex].currentTasks[taskIndex].task}? (y/n)`)
   if (deleteConfirmation === "y"){
-    console.log(`projectsAndTasks[projectIndex].currentTasks[taskIndex]: ${projectsAndTasks[projectIndex].currentTasks[taskIndex]}`);
     projectsAndTasks[projectIndex].currentTasks.splice(taskIndex, 1);
-    console.log(`projectsAndTasks[projectIndex].currentTasks[taskIndex]: ${projectsAndTasks[projectIndex].currentTasks[taskIndex]}`);
     // update the localStorage
     localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
     location.reload();

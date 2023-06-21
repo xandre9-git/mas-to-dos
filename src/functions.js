@@ -42,6 +42,12 @@ function getTextWidth(text, font) {
   return metrics.width;
 }
 
+// find project index
+function projectIndex(project) {
+  const index = projectsAndTasks.findIndex((e) => e.projectName === project);
+  return index;
+}
+
 // creates projects in database
 function projectCreator() {
   // prompt user for project name
@@ -69,13 +75,25 @@ function projectCreator() {
   location.reload();
 }
 
-// function to delete projects
-function deleteProject(e){
-  // code here 
+// function to rename projects
+function renameProject(project) {
+  // code here
+  // grab project name
+  console.log(`Project to rename: ${project}`);
+  // find the project index in the database
+  const index = projectIndex(project);
+  // path to matched project name (will be used later to mark where renamed project is to be stored)
+  console.log(`projectsAndTasks[index]: ${projectsAndTasks[index].projectName}`);
+  // allow user to rename project (convert list item to input and then back to list item after rename)
+  // grab list item
+  const element = document.querySelectorAll(".added-projects");
+  console.log(`element length: ${element.length}`);
+  // const array = Array.from(element);
+  // console.log(`array: ${array}`)
 }
 
-// function to rename projects
-function renameProject(){
+// function to delete projects
+function deleteProject(e) {
   // code here
 }
 
@@ -130,31 +148,36 @@ function displayProjects(arr, parentNode) {
     // project action button container
     const projectActionBtnContainer = document.createElement("div");
     projectActionBtnContainer.className = "project-action-btn-container";
-    
+
     // project rename button
     const projectEditBtn = document.createElement("div");
     projectEditBtn.title = "Rename Project";
     projectEditBtn.className = "project-edit-btn";
-    
+    projectEditBtn.addEventListener("click", function (e) {
+      // console.log(e.target.parentNode.parentNode.textContent);
+      const project = e.target.parentNode.parentNode.textContent;
+      renameProject(project);
+    });
+
     // project deletion button
     const projectDeleteBtn = document.createElement("div");
     projectDeleteBtn.title = "Delete Project";
     projectDeleteBtn.className = "project-delete-btn";
-    
+
     // append project action buttons
     projectActionBtnContainer.appendChild(projectEditBtn);
     projectActionBtnContainer.appendChild(projectDeleteBtn);
     addProject.appendChild(projectActionBtnContainer);
 
     // mouse in and out event listeners for hover color change status
-    addProject.addEventListener("mouseenter", () =>{
+    addProject.addEventListener("mouseenter", () => {
       projectEditBtn.classList.add("proj-edit-hovered");
       projectDeleteBtn.classList.add("proj-del-hovered");
-    })
-    addProject.addEventListener("mouseleave", () =>{
+    });
+    addProject.addEventListener("mouseleave", () => {
       projectEditBtn.classList.remove("proj-edit-hovered");
       projectDeleteBtn.classList.remove("proj-del-hovered");
-    })
+    });
     // append newly added project to specified node
     parentNode.appendChild(addProject);
   }
@@ -396,10 +419,9 @@ function editDetails(str) {
 
     // delete btn event listener
     let deleteBtn = document.querySelector("#delete-btn");
-    deleteBtn.addEventListener("click", function(){
+    deleteBtn.addEventListener("click", function () {
       deleteDetails(projectIndex, taskIndex);
-    })
-
+    });
   } else if (showOrHide.length === 0) {
     querySelected.style.display = "none";
   }
@@ -476,8 +498,10 @@ function cancelDetails() {
 }
 
 function deleteDetails(projectIndex, taskIndex) {
-  let deleteConfirmation = prompt(`Are you sure you would like to delete task: ${projectsAndTasks[projectIndex].currentTasks[taskIndex].task}? (y/n)`)
-  if (deleteConfirmation === "y"){
+  let deleteConfirmation = prompt(
+    `Are you sure you would like to delete task: ${projectsAndTasks[projectIndex].currentTasks[taskIndex].task}? (y/n)`
+  );
+  if (deleteConfirmation === "y") {
     projectsAndTasks[projectIndex].currentTasks.splice(taskIndex, 1);
     // update the localStorage
     localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
@@ -485,7 +509,6 @@ function deleteDetails(projectIndex, taskIndex) {
   } else {
     return;
   }
-
 }
 
 // exports

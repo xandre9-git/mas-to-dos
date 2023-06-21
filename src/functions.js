@@ -77,19 +77,45 @@ function projectCreator() {
 
 // function to rename projects
 function renameProject(project) {
-  // code here
   // grab project name
   console.log(`Project to rename: ${project}`);
   // find the project index in the database
   const index = projectIndex(project);
   // path to matched project name (will be used later to mark where renamed project is to be stored)
-  console.log(`projectsAndTasks[index]: ${projectsAndTasks[index].projectName}`);
+  console.log(
+    `projectsAndTasks[index]: ${projectsAndTasks[index].projectName}`
+  );
   // allow user to rename project (convert list item to input and then back to list item after rename)
-  // grab list item
-  const element = document.querySelectorAll(".added-projects");
-  console.log(`element length: ${element.length}`);
-  // const array = Array.from(element);
-  // console.log(`array: ${array}`)
+  // grab list item that matches project name
+  const listItem = document.querySelector(
+    'li[data-project-name="' + project + '"]'
+  );
+  // list item's textContent
+  const itemText = listItem.textContent;
+  // clear list item's textContent
+  listItem.textContent = "";
+  // turn this element into an input element
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = itemText;
+
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      listItem.textContent = input.value;
+      // update database
+      projectsAndTasks[index].projectName = listItem.textContent;
+      // update localStorage
+      localStorage.setItem(
+        "projectsAndTasks",
+        JSON.stringify(projectsAndTasks)
+      );
+      // reload page
+      location.reload();
+    }
+  });
+
+  listItem.appendChild(input);
+  input.focus();
 }
 
 // function to delete projects
@@ -131,6 +157,8 @@ function displayProjects(arr, parentNode) {
     addProject.className = "added-projects";
     // set the text content to the project name found in this iteration
     addProject.textContent = arr[i].projectName;
+    // set a data attribute for it
+    addProject.dataset.projectName = arr[i].projectName;
     // create conditional to check if default task is matched
     if (arr[i].projectName === activeProject) {
       // set default project to active

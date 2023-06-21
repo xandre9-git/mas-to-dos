@@ -77,32 +77,27 @@ function projectCreator() {
 
 // function to rename projects
 function renameProject(project) {
-  // grab project name
-  console.log(`Project to rename: ${project}`);
   // find the project index in the database
   const index = projectIndex(project);
-  // path to matched project name (will be used later to mark where renamed project is to be stored)
-  console.log(
-    `projectsAndTasks[index]: ${projectsAndTasks[index].projectName}`
-  );
-  // allow user to rename project (convert list item to input and then back to list item after rename)
   // grab list item that matches project name
   const listItem = document.querySelector(
     'li[data-project-name="' + project + '"]'
   );
-  // list item's textContent
+  // set list item's textContent as variable
   const itemText = listItem.textContent;
   // clear list item's textContent
   listItem.textContent = "";
-  // turn this element into an input element
+  // create input element for user to rename project
   const input = document.createElement("input");
   input.type = "text";
+  // set input's starting value to project name
   input.value = itemText;
-
+  // listen for enter key press
   input.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
+      // set new value for list item's textContent based on users input
       listItem.textContent = input.value;
-      // update database
+      // update database through path to matched project name
       projectsAndTasks[index].projectName = listItem.textContent;
       // update localStorage
       localStorage.setItem(
@@ -113,14 +108,33 @@ function renameProject(project) {
       location.reload();
     }
   });
-
+  
   listItem.appendChild(input);
   input.focus();
 }
 
 // function to delete projects
-function deleteProject(e) {
-  // code here
+function deleteProject(project) {
+ 
+  // find index of projectName
+  const index = projectIndex(project);
+  // target location of project
+  projectsAndTasks[index].projectName
+  // splice project out of database (confirm)
+  let deleteConfirmation = prompt(
+    `Are you sure you would like to delete project: ${projectsAndTasks[index].projectName}? This will delete all tasks within this project as well. (y/n)`
+  );
+  if (deleteConfirmation === "y") {
+    projectsAndTasks.splice(index, 1);
+    // update the localStorage
+    localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
+    location.reload();
+  } else {
+    return;
+  }
+  // update localStorage
+  // reload page
+  
 }
 
 // variable to select specific project
@@ -191,6 +205,10 @@ function displayProjects(arr, parentNode) {
     const projectDeleteBtn = document.createElement("div");
     projectDeleteBtn.title = "Delete Project";
     projectDeleteBtn.className = "project-delete-btn";
+    projectDeleteBtn.addEventListener("click", function(e){
+      const project = e.target.parentNode.parentNode.textContent;
+      deleteProject(project);
+    })
 
     // append project action buttons
     projectActionBtnContainer.appendChild(projectEditBtn);

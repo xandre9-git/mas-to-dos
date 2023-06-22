@@ -108,33 +108,30 @@ function renameProject(project) {
       location.reload();
     }
   });
-  
+
   listItem.appendChild(input);
   input.focus();
 }
 
 // function to delete projects
 function deleteProject(project) {
- 
   // find index of projectName
   const index = projectIndex(project);
   // target location of project
-  projectsAndTasks[index].projectName
+  projectsAndTasks[index].projectName;
   // splice project out of database (confirm)
   let deleteConfirmation = prompt(
-    `Are you sure you would like to delete project: ${projectsAndTasks[index].projectName}? This will delete all tasks within this project as well. (y/n)`
+    `Are you sure you would like to delete project: ${projectsAndTasks[index].projectName}? This will delete all tasks within this project as well! (y/n)`
   );
   if (deleteConfirmation === "y") {
     projectsAndTasks.splice(index, 1);
     // update the localStorage
     localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
+    // reload page
     location.reload();
   } else {
     return;
   }
-  // update localStorage
-  // reload page
-  
 }
 
 // variable to select specific project
@@ -196,7 +193,6 @@ function displayProjects(arr, parentNode) {
     projectEditBtn.title = "Rename Project";
     projectEditBtn.className = "project-edit-btn";
     projectEditBtn.addEventListener("click", function (e) {
-      // console.log(e.target.parentNode.parentNode.textContent);
       const project = e.target.parentNode.parentNode.textContent;
       renameProject(project);
     });
@@ -205,10 +201,10 @@ function displayProjects(arr, parentNode) {
     const projectDeleteBtn = document.createElement("div");
     projectDeleteBtn.title = "Delete Project";
     projectDeleteBtn.className = "project-delete-btn";
-    projectDeleteBtn.addEventListener("click", function(e){
+    projectDeleteBtn.addEventListener("click", function (e) {
       const project = e.target.parentNode.parentNode.textContent;
       deleteProject(project);
-    })
+    });
 
     // append project action buttons
     projectActionBtnContainer.appendChild(projectEditBtn);
@@ -265,7 +261,6 @@ function taskCreator(task) {
 let prevTask = null; // declare prevTask at a higher scope level
 
 const taskClicked = (e) => {
-  // explain this...
   // check to see if task clicked has active-task as a class name
   if (e.target.className == "task-list-item active-task") {
     // reload the page so new applications of editDetails() can run
@@ -276,7 +271,6 @@ const taskClicked = (e) => {
     e.target.classList.add("active-task");
     if (prevTask !== null) {
       prevTask.classList.remove("active-task");
-      // well, shit.
     }
     prevTask = e.target;
     console.log(prevTask.textContent);
@@ -299,7 +293,7 @@ function displayTasks(project, arr, parentNode) {
   if (projectIndex != -1) {
     Object.values(arr[projectIndex].currentTasks).forEach(function (e) {
       if (arr[projectIndex].currentTasks != undefined) {
-        // run this shit
+        // push new task into newly created array
         tasks.push(e.task);
       }
     });
@@ -325,12 +319,44 @@ function displayTasks(project, arr, parentNode) {
     completeBtn.className = "task-complete-btn";
     completeBtn.type = "checkbox";
     completeBtn.title = "Complete Task";
+    // event listener for completion of task
+    completeBtn.addEventListener("click", function (e) {
+      const task = e.target.parentNode.parentNode;
+      if (completeBtn.checked) {
+        // manipulate the DOM element of task to include strikethrough of text
+        task.style.textDecoration = "line-through";
+        completeTask(task.textContent, projectIndex);
+      } else {
+        task.style.textDecoration = "";
+        unCompleteTask(task.textContent);
+      }
+    });
     actionBtnContainer.appendChild(completeBtn);
-
     taskContainer.appendChild(actionBtnContainer);
-
     parentNode.appendChild(taskContainer);
   }
+
+
+}
+
+// complete task function
+function completeTask(taskName, projectIndex) {
+  console.log(`Testing task variable: ${taskName}`);
+  console.log(`Testing project variable: ${projectIndex}`);
+  const taskIndex = projectsAndTasks[projectIndex].currentTasks.findIndex((e) => e.task === taskName);
+  console.log(`taskIndex: ${taskIndex}`)
+  // need to select the respective DOM element...
+  console.log(`projectsAndTasks[projectIndex].currentTasks[taskIndex].task: ${projectsAndTasks[projectIndex].currentTasks[taskIndex]}`);
+  // find the current task in the database
+  const foundTask = projectsAndTasks[projectIndex].currentTasks[taskIndex];
+  // move the current task into the completedTasks array of database
+
+
+  // move it to completed tasks
+}
+
+function unCompleteTask(task) {
+  console.log(`Testing task variable: ${task}`);
 }
 
 function editDetails(str) {

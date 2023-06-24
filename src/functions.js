@@ -335,24 +335,36 @@ function displayTasks(project, arr, parentNode) {
     taskContainer.appendChild(actionBtnContainer);
     parentNode.appendChild(taskContainer);
   }
-
-
 }
 
 // complete task function
 function completeTask(taskName, projectIndex) {
   console.log(`Testing task variable: ${taskName}`);
   console.log(`Testing project variable: ${projectIndex}`);
-  const taskIndex = projectsAndTasks[projectIndex].currentTasks.findIndex((e) => e.task === taskName);
-  console.log(`taskIndex: ${taskIndex}`)
+  const taskIndex = projectsAndTasks[projectIndex].currentTasks.findIndex(
+    (e) => e.task === taskName
+  );
+  console.log(`taskIndex: ${taskIndex}`);
   // need to select the respective DOM element...
-  console.log(`projectsAndTasks[projectIndex].currentTasks[taskIndex].task: ${projectsAndTasks[projectIndex].currentTasks[taskIndex]}`);
+  console.log(
+    `projectsAndTasks[projectIndex].currentTasks[taskIndex].task: ${projectsAndTasks[projectIndex].currentTasks[taskIndex].task}`
+  );
   // find the current task in the database
-  const foundTask = projectsAndTasks[projectIndex].currentTasks[taskIndex];
+  const completedTask = projectsAndTasks[projectIndex].currentTasks[taskIndex];
   // move the current task into the completedTasks array of database
+  projectsAndTasks[projectIndex].completedTasks.push(completedTask);
+  // remove the task from current tasks
+  projectsAndTasks[projectIndex].currentTasks.splice(
+    projectsAndTasks[projectIndex].currentTasks.indexOf(completedTask),
+    1
+  );
 
-
-  // move it to completed tasks
+  console.log(projectsAndTasks[projectIndex].currentTasks);
+  console.log(projectsAndTasks[projectIndex].completedTasks);
+  // update the localStorage
+  localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
+  // reload the page
+  // location.reload();
 }
 
 function unCompleteTask(task) {
@@ -371,11 +383,16 @@ function editDetails(str) {
   if (showOrHide.length > 0) {
     const taskTitle = str.textContent;
 
-    // find the object containing the task provided as an argument
-    const taskObject = projectsAndTasks
-      .flatMap((project) => project.currentTasks) // flatten the nested array of tasks
-      .filter((task) => task.task === taskTitle); // filter the tasks by task name
+    // find the object containing the task provided as an argument (need to have this search completed tasks as well)
 
+    // fuck
+    const taskObject = projectsAndTasks
+      .flatMap((project) => [
+        ...project.currentTasks,
+        ...project.completedTasks,
+      ]) // flatten the nested array of tasks
+      .filter((task) => task.task === taskTitle); // filter the tasks by task name
+    console.log(`taskObject: ${taskObject}`);
     const projectWithTask = projectsAndTasks
       .map((project) => {
         // For each project, we are going to find a task that matches the taskTitle

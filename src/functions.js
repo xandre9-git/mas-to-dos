@@ -297,6 +297,12 @@ function displayTasks(project, arr, parentNode) {
         tasks.push(e.task);
       }
     });
+    Object.values(arr[projectIndex].completedTasks).forEach(function (e) {
+      if (arr[projectIndex].completedTasks != undefined) {
+        // push new task into newly created array
+        tasks.push(e.task);
+      }
+    });
   }
 
   // reset the contents of the parentNode argument
@@ -313,12 +319,32 @@ function displayTasks(project, arr, parentNode) {
     const listItem = document.createElement("li");
     listItem.className = "task-list-item";
     listItem.textContent = tasks[i];
+    // console.log(`projectsAndTasks[projectIndex].completedTasks: ${projectsAndTasks[projectIndex].completedTasks[i].task}`);
+    // console.log(projectsAndTasks[projectIndex].completedTasks[i].task.includes(tasks[i]))
+    // check to see if task is completed then add a strikethrough if so
+    // for (let j = 0; j < projectsAndTasks[projectIndex].completedTasks.length; j++){
+    //   if (projectsAndTasks[projectIndex].completedTasks[j].task.includes(tasks[i])){
+    //     // code
+    //     console.log(`tasks[i]: ${tasks[i]}`);
+    //     listItem.style.textDecoration = "line-through";
+    //   }
+    // }
+
     taskContainer.appendChild(listItem);
 
     const completeBtn = document.createElement("input");
     completeBtn.className = "task-complete-btn";
     completeBtn.type = "checkbox";
     completeBtn.title = "Complete Task";
+    // loop through completed tasks and add strikethrough and checked box to tasks that match current task iteration
+    for (let j = 0; j < projectsAndTasks[projectIndex].completedTasks.length; j++){
+      if (projectsAndTasks[projectIndex].completedTasks[j].task.includes(tasks[i])){
+        // code
+        console.log(`tasks[i]: ${tasks[i]}`);
+        listItem.style.textDecoration = "line-through";
+        completeBtn.checked = true;
+      }
+    }
     // event listener for completion of task
     completeBtn.addEventListener("click", function (e) {
       const task = e.target.parentNode.parentNode;
@@ -328,7 +354,7 @@ function displayTasks(project, arr, parentNode) {
         completeTask(task.textContent, projectIndex);
       } else {
         task.style.textDecoration = "";
-        unCompleteTask(task.textContent);
+        unCompleteTask(task.textContent, projectIndex);
       }
     });
     actionBtnContainer.appendChild(completeBtn);
@@ -367,8 +393,33 @@ function completeTask(taskName, projectIndex) {
   // location.reload();
 }
 
-function unCompleteTask(task) {
-  console.log(`Testing task variable: ${task}`);
+function unCompleteTask(taskName, projectIndex) {
+  console.log(`Testing task variable: ${taskName}`);
+  console.log(`Testing project variable: ${projectIndex}`);
+  const taskIndex = projectsAndTasks[projectIndex].completedTasks.findIndex(
+    (e) => e.task === taskName
+  );
+  console.log(`taskIndex: ${taskIndex}`);
+  // need to select the respective DOM element...
+  console.log(
+    `projectsAndTasks[projectIndex].completedTasks[taskIndex].task: ${projectsAndTasks[projectIndex].completedTasks[taskIndex].task}`
+  );
+  // find the completed task in the database
+  const unCompletedTask = projectsAndTasks[projectIndex].completedTasks[taskIndex];
+  // move the completed task into the currentTasks array of database
+  projectsAndTasks[projectIndex].currentTasks.push(unCompletedTask);
+  // remove the task from completed tasks
+  projectsAndTasks[projectIndex].completedTasks.splice(
+    projectsAndTasks[projectIndex].completedTasks.indexOf(unCompletedTask),
+    1
+  );
+
+  console.log(projectsAndTasks[projectIndex].currentTasks);
+  console.log(projectsAndTasks[projectIndex].completedTasks);
+  // update the localStorage
+  localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
+  // reload the page
+  location.reload();
 }
 
 function editDetails(str) {

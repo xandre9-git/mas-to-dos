@@ -518,9 +518,13 @@ function editDetails(str) {
     let task = document.querySelector("#task-input-detail");
     task.value = taskObject[0].task;
     resizeInput();
-    const taskIndex = projectsAndTasks[projectIndex].currentTasks.findIndex(
+    const taskIndex = projectsAndTasks[projectIndex]?.currentTasks?.findIndex(
       (e) => e.task === task.value
     );
+
+    if (taskIndex === -1){
+      console.log(`RAGE!`);
+    }
 
     // dateCreated
     let dateCreated = taskObject[0].dateCreated;

@@ -73,7 +73,6 @@ projectBtns.appendChild(deleteProjectBtn);
 
 // TO DOS
 
-
 // to do board container
 const todoBoardsContainer = document.createElement("div");
 todoBoardsContainer.id = "to-dos-container";
@@ -136,15 +135,14 @@ addTaskContainer.appendChild(addTaskBtn);
 
 // current tasks unordered list
 const currentTaskList = document.createElement("div");
-// note: add styling
 currentTaskList.id = "current-tasks-ul";
 currentTaskListContainer.appendChild(currentTaskList);
 
 // current tasks list item
 const addTaskListItem = document.createElement("li");
-// note: add styling
 addTaskListItem.className = "add-task-li";
 
+// display all tasks
 displayTasks(activeProject, projectsAndTasks, currentTaskList);
 
 // function to change active selected task
@@ -154,7 +152,6 @@ currentTaskList.addEventListener("click", taskClicked);
 
 // details board container
 const detailsContainer = document.createElement("div");
-// note: add styling
 detailsContainer.id = "details-container";
 detailsContainer.style.display = "none";
 

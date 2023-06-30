@@ -4,7 +4,6 @@ import { currentTaskList } from "./dom";
 
 // date functions
 // create newDate based on current date
-
 function currentDate() {
   const date = new Date();
   const time = date.toLocaleTimeString("en-US", {
@@ -58,7 +57,6 @@ function projectCreator() {
     projectName != null &&
     !projectsAndTasks.some((e) => e.projectName === projectName)
   ) {
-    console.log("Criteria met.");
     // now create a new object in the database with the new project name
     projectsAndTasks.push({
       projectName: projectName,
@@ -68,7 +66,6 @@ function projectCreator() {
     // save newly created project to localStorage
     localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
   } else {
-    console.log("Criteria not met.");
     return;
   }
   // reload the document
@@ -238,7 +235,6 @@ function taskCreator(task) {
 
   // create newTask object to later push to projectsAndTasks array
   let newTask = {
-    // id: newId,
     task: task,
     dateCreated: new Date(),
     dateDue: currentDate().yearMonthDay,
@@ -273,10 +269,10 @@ const taskClicked = (e) => {
       prevTask.classList.remove("active-task");
     }
     prevTask = e.target;
-    console.log(prevTask.textContent);
   }
-
-  editDetails(e.target);
+  if (e.target.style.textDecoration != "line-through") {
+    editDetails(e.target);
+  }
 };
 
 function displayTasks(project, arr, parentNode) {
@@ -286,10 +282,8 @@ function displayTasks(project, arr, parentNode) {
   );
   // create empty array for current tasks
   const tasks = [];
-  console.log(`projectIndex: ${projectIndex}`);
 
   // extracts tasks from 'currentTasks' property of an object in the 'arr' array and pushes into the tasks array
-
   if (projectIndex != -1) {
     Object.values(arr[projectIndex].currentTasks).forEach(function (e) {
       if (arr[projectIndex].currentTasks != undefined) {
@@ -319,17 +313,6 @@ function displayTasks(project, arr, parentNode) {
     const listItem = document.createElement("li");
     listItem.className = "task-list-item";
     listItem.textContent = tasks[i];
-    // console.log(`projectsAndTasks[projectIndex].completedTasks: ${projectsAndTasks[projectIndex].completedTasks[i].task}`);
-    // console.log(projectsAndTasks[projectIndex].completedTasks[i].task.includes(tasks[i]))
-    // check to see if task is completed then add a strikethrough if so
-    // for (let j = 0; j < projectsAndTasks[projectIndex].completedTasks.length; j++){
-    //   if (projectsAndTasks[projectIndex].completedTasks[j].task.includes(tasks[i])){
-    //     // code
-    //     console.log(`tasks[i]: ${tasks[i]}`);
-    //     listItem.style.textDecoration = "line-through";
-    //   }
-    // }
-
     taskContainer.appendChild(listItem);
 
     const completeBtn = document.createElement("input");
@@ -337,10 +320,14 @@ function displayTasks(project, arr, parentNode) {
     completeBtn.type = "checkbox";
     completeBtn.title = "Complete Task";
     // loop through completed tasks and add strikethrough and checked box to tasks that match current task iteration
-    for (let j = 0; j < projectsAndTasks[projectIndex].completedTasks.length; j++){
-      if (projectsAndTasks[projectIndex].completedTasks[j].task.includes(tasks[i])){
-        // code
-        console.log(`tasks[i]: ${tasks[i]}`);
+    for (
+      let j = 0;
+      j < projectsAndTasks[projectIndex].completedTasks.length;
+      j++
+    ) {
+      if (
+        projectsAndTasks[projectIndex].completedTasks[j].task.includes(tasks[i])
+      ) {
         listItem.style.textDecoration = "line-through";
         completeBtn.checked = true;
       }
@@ -365,15 +352,8 @@ function displayTasks(project, arr, parentNode) {
 
 // complete task function
 function completeTask(taskName, projectIndex) {
-  console.log(`Testing task variable: ${taskName}`);
-  console.log(`Testing project variable: ${projectIndex}`);
   const taskIndex = projectsAndTasks[projectIndex].currentTasks.findIndex(
     (e) => e.task === taskName
-  );
-  console.log(`taskIndex: ${taskIndex}`);
-  // need to select the respective DOM element...
-  console.log(
-    `projectsAndTasks[projectIndex].currentTasks[taskIndex].task: ${projectsAndTasks[projectIndex].currentTasks[taskIndex].task}`
   );
   // find the current task in the database
   const completedTask = projectsAndTasks[projectIndex].currentTasks[taskIndex];
@@ -384,28 +364,21 @@ function completeTask(taskName, projectIndex) {
     projectsAndTasks[projectIndex].currentTasks.indexOf(completedTask),
     1
   );
-
-  console.log(projectsAndTasks[projectIndex].currentTasks);
-  console.log(projectsAndTasks[projectIndex].completedTasks);
   // update the localStorage
   localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
   // reload the page
-  // location.reload();
+  location.reload();
 }
 
 function unCompleteTask(taskName, projectIndex) {
-  console.log(`Testing task variable: ${taskName}`);
-  console.log(`Testing project variable: ${projectIndex}`);
+
   const taskIndex = projectsAndTasks[projectIndex].completedTasks.findIndex(
     (e) => e.task === taskName
   );
-  console.log(`taskIndex: ${taskIndex}`);
   // need to select the respective DOM element...
-  console.log(
-    `projectsAndTasks[projectIndex].completedTasks[taskIndex].task: ${projectsAndTasks[projectIndex].completedTasks[taskIndex].task}`
-  );
   // find the completed task in the database
-  const unCompletedTask = projectsAndTasks[projectIndex].completedTasks[taskIndex];
+  const unCompletedTask =
+    projectsAndTasks[projectIndex].completedTasks[taskIndex];
   // move the completed task into the currentTasks array of database
   projectsAndTasks[projectIndex].currentTasks.push(unCompletedTask);
   // remove the task from completed tasks
@@ -413,9 +386,6 @@ function unCompleteTask(taskName, projectIndex) {
     projectsAndTasks[projectIndex].completedTasks.indexOf(unCompletedTask),
     1
   );
-
-  console.log(projectsAndTasks[projectIndex].currentTasks);
-  console.log(projectsAndTasks[projectIndex].completedTasks);
   // update the localStorage
   localStorage.setItem("projectsAndTasks", JSON.stringify(projectsAndTasks));
   // reload the page
@@ -436,20 +406,22 @@ function editDetails(str) {
 
     // find the object containing the task provided as an argument (need to have this search completed tasks as well)
 
-    // fuck
-    const taskObject = projectsAndTasks
-      .flatMap((project) => [
-        ...project.currentTasks,
-        ...project.completedTasks,
-      ]) // flatten the nested array of tasks
+    // create variable to search database for task
+    let taskObject = projectsAndTasks
+      .flatMap((project) => project.currentTasks) // flatten the nested array of tasks
       .filter((task) => task.task === taskTitle); // filter the tasks by task name
-    console.log(`taskObject: ${taskObject}`);
+    if (taskObject == "") {
+      taskObject = projectsAndTasks
+        .flatMap((project) => project.completedTasks) // flatten the nested array of tasks
+        .filter((task) => task.task === taskTitle);
+    }
     const projectWithTask = projectsAndTasks
       .map((project) => {
         // For each project, we are going to find a task that matches the taskTitle
-        const task = project.currentTasks.find(
-          (task) => task.task === taskTitle // Check if the task's title matches the taskTitle we are looking for
-        );
+        const task =
+          project.currentTasks.find(
+            (task) => task.task === taskTitle // Check if the task's title matches the taskTitle we are looking for
+          ) || project.completedTasks.find((task) => task.task === taskTitle);
         // If we found a matching task, we create an object with the project name and the task
         // If we didn't find a matching task, we return null
         return task ? { projectName: project.projectName, task } : null;
@@ -499,9 +471,6 @@ function editDetails(str) {
     let prioritySelect = document.querySelector("#task-priority > select");
     const priorityOptions = prioritySelect.options;
     for (let i = 0; i < priorityOptions.length; i++) {
-      console.log(
-        `priorityOptions[i].textContent: ${priorityOptions[i].textContent}`
-      );
       if (priorityOptions[i].textContent === taskObject[0].priority) {
         priorityOptions[i].selected = "selected";
       }
@@ -521,10 +490,6 @@ function editDetails(str) {
     const taskIndex = projectsAndTasks[projectIndex]?.currentTasks?.findIndex(
       (e) => e.task === task.value
     );
-
-    if (taskIndex === -1){
-      console.log(`RAGE!`);
-    }
 
     // dateCreated
     let dateCreated = taskObject[0].dateCreated;
@@ -642,8 +607,9 @@ function cancelDetails() {
 }
 
 function deleteDetails(projectIndex, taskIndex) {
+  let task = projectsAndTasks[projectIndex]?.currentTasks[taskIndex]?.task;
   let deleteConfirmation = prompt(
-    `Are you sure you would like to delete task: ${projectsAndTasks[projectIndex].currentTasks[taskIndex].task}? (y/n)`
+    `Are you sure you would like to delete task: ${task}? (y/n)`
   );
   if (deleteConfirmation === "y") {
     projectsAndTasks[projectIndex].currentTasks.splice(taskIndex, 1);

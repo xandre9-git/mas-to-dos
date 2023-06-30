@@ -113,15 +113,14 @@ addTasksInput.addEventListener("keypress", function (e) {
     addTasksInput.value = "";
   }
 });
+
 addTaskContainer.appendChild(addTasksInput);
 
 // add tasks submit button
 const addTaskBtn = document.createElement("button");
 addTaskBtn.textContent = "+";
 addTaskBtn.type = "submit";
-// note: add styling
 addTaskBtn.id = "add-task-btn";
-
 addTaskBtn.addEventListener("click", function (e) {
   // get input id for task-bar
   const input = document.getElementById("task-input-bar");

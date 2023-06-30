@@ -15,7 +15,6 @@ h1 {
   font-size: 2rem;
 }
 
-
 #content {
   display: grid;
   grid-template-areas:
@@ -70,12 +69,7 @@ h1 {
   width: 90%;
 }
 
-#task-input-detail {
-
-}
-
 #details-container {
-  /* grid-area: c; */
   background-color: rgb(20, 165, 173);
   height: 90vh;
   flex-direction: column;

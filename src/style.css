@@ -240,3 +240,12 @@ textarea {
 .active-task {
   color: dodgerblue;
 }
+
+.rename-project {
+  background-color:coral;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  font-family: "Oswald", Courier, monospace;
+  color: rebeccapurple;
+}

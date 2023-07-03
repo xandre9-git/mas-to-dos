@@ -80,12 +80,13 @@ function renameProject(project) {
   const listItem = document.querySelector(
     'li[data-project-name="' + project + '"]'
   );
-  // set list item's textContent as variable
+  // set list item's textContent as a variable
   const itemText = listItem.textContent;
   // clear list item's textContent
   listItem.textContent = "";
   // create input element for user to rename project
   const input = document.createElement("input");
+  input.className = "rename-project";
   input.type = "text";
   // set input's starting value to project name
   input.value = itemText;

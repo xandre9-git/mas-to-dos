@@ -133,13 +133,19 @@ function deleteProject(project) {
 }
 
 // variable to select specific project
+
 const activeProjectLocalStorage = window.localStorage.getItem("activeProject");
 let prevProject = null;
 let activeProject =
   activeProjectLocalStorage != null ? activeProjectLocalStorage : null;
 
+// well fuck strikes back
+// need to set 'My Tasks' as active-project by default...
+
+
 // function to switch which project is active
 const projectClicked = (e) => {
+  localStorage.setItem("activeProject", "My Tasks");
   // check to see if element clicked is a <li> (list item)
   if (e.target.nodeName === "LI") {
     // add .active class to element clicked

@@ -133,25 +133,30 @@ function deleteProject(project) {
 }
 
 // variable to select specific project
+// on load run this command 
 
 const activeProjectLocalStorage = window.localStorage.getItem("activeProject");
 let prevProject = null;
 let activeProject =
-  activeProjectLocalStorage != null ? activeProjectLocalStorage : null;
-
+  activeProjectLocalStorage != "My Tasks" ? activeProjectLocalStorage : "My Tasks";
+console.log(`activeProjectLocalStorage: ${activeProjectLocalStorage}`);
 // well fuck strikes back
 // need to set 'My Tasks' as active-project by default...
 
 
+// need to select 'My Tasks' DOM element
+
+
 // function to switch which project is active
 const projectClicked = (e) => {
-  localStorage.setItem("activeProject", "My Tasks");
+
   // check to see if element clicked is a <li> (list item)
   if (e.target.nodeName === "LI") {
-    // add .active class to element clicked
+    // add .active-project class to element clicked
     e.target.classList.add("active-project");
     activeProject = e.target;
     localStorage.setItem("activeProject", activeProject.textContent);
+    // console.log(`activeProject: ${activeProject.textContent}`);
     // check to see if there is a previous project that was active
     if (prevProject !== null) {
       // removes active class from the element
@@ -164,6 +169,7 @@ const projectClicked = (e) => {
 
 // displays projects onto the DOM
 function displayProjects(arr, parentNode) {
+  
   // loop through array
   for (let i = 0; i < arr.length; i++) {
     // create list item for project
@@ -172,7 +178,7 @@ function displayProjects(arr, parentNode) {
     addProject.className = "added-projects";
     // set the text content to the project name found in this iteration
     addProject.textContent = arr[i].projectName;
-    // set a data attribute for it
+    // create a data attribute for it
     addProject.dataset.projectName = arr[i].projectName;
     // create conditional to check if default task is matched
     if (arr[i].projectName === activeProject) {

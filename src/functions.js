@@ -133,30 +133,21 @@ function deleteProject(project) {
 }
 
 // variable to select specific project
-// on load run this command 
+// on load run this command
 
 const activeProjectLocalStorage = window.localStorage.getItem("activeProject");
 let prevProject = null;
 let activeProject =
-  activeProjectLocalStorage != "My Tasks" ? activeProjectLocalStorage : "My Tasks";
-console.log(`activeProjectLocalStorage: ${activeProjectLocalStorage}`);
-// well fuck strikes back
-// need to set 'My Tasks' as active-project by default...
-
-
-// need to select 'My Tasks' DOM element
-
+  activeProjectLocalStorage != null ? activeProjectLocalStorage : "My Tasks";
 
 // function to switch which project is active
 const projectClicked = (e) => {
-
   // check to see if element clicked is a <li> (list item)
-  if (e.target.nodeName === "LI") {
+  if (e.target.nodeName === "LI" && e.target.className === "added-projects") {
     // add .active-project class to element clicked
     e.target.classList.add("active-project");
     activeProject = e.target;
     localStorage.setItem("activeProject", activeProject.textContent);
-    // console.log(`activeProject: ${activeProject.textContent}`);
     // check to see if there is a previous project that was active
     if (prevProject !== null) {
       // removes active class from the element
@@ -169,7 +160,6 @@ const projectClicked = (e) => {
 
 // displays projects onto the DOM
 function displayProjects(arr, parentNode) {
-  
   // loop through array
   for (let i = 0; i < arr.length; i++) {
     // create list item for project
@@ -384,7 +374,6 @@ function completeTask(taskName, projectIndex) {
 }
 
 function unCompleteTask(taskName, projectIndex) {
-
   const taskIndex = projectsAndTasks[projectIndex].completedTasks.findIndex(
     (e) => e.task === taskName
   );

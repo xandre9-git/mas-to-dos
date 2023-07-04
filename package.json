@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "github-pages": "git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {
     "date-fns": "^2.30.0"

@@ -227,10 +227,7 @@ function displayProjects(arr, parentNode) {
 
 // creates tasks
 function taskCreator(task) {
-  // create variable to search database array for project that is currently active
-  const projectExists = projectsAndTasks.some(
-    (e) => e.projectName === prevProject.textContent
-  );
+
   // find index of project found in database
   const projectIndex = projectsAndTasks.findIndex(
     (e) => e.projectName === prevProject.textContent

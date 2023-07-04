@@ -9,6 +9,7 @@ import { taskClicked } from "./functions";
 import { taskCreator } from "./functions";
 import { cancelDetails } from "./functions";
 
+
 // main container for the app
 const body = document.getElementById("content");
 
@@ -302,6 +303,8 @@ detailsDeleteBtn.id = "delete-btn";
 detailsDeleteBtn.title = "Delete Task";
 detailsBtnContainer.appendChild(detailsDeleteBtn);
 todoBoardsContainer.appendChild(detailsContainer);
+
+
 
 // dom #content appends
 body.appendChild(topBar);

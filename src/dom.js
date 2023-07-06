@@ -178,6 +178,7 @@ projectSelectorContainer.appendChild(selectProjectTitle);
 
 // details project selector
 const selectProject = document.createElement("select");
+selectProject.name = "project-select";
 projectSelectorContainer.appendChild(selectProject);
 
 // details task input container
@@ -238,6 +239,7 @@ taskPriorityContainer.appendChild(taskPriorityTitle);
 
 // task priority selector
 const taskPrioritySelector = document.createElement("select");
+taskPrioritySelector.name = "task-priority-select";
 taskPriorityContainer.appendChild(taskPrioritySelector);
 
 // none priority option

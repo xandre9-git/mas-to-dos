@@ -227,12 +227,11 @@ function displayProjects(arr, parentNode) {
 
 // creates tasks
 function taskCreator(task) {
-  if (task === "string" && task.trim.length > 0) {
-    // find index of project found in database
-    const projectIndex = projectsAndTasks.findIndex(
-      (e) => e.projectName === prevProject.textContent
-    );
-
+  // find index of project found in database
+  const projectIndex = projectsAndTasks.findIndex(
+    (e) => e.projectName === prevProject.textContent
+  );
+  if (task.length > 0) {
     // create newTask object to later push to projectsAndTasks array
     let newTask = {
       task: task,

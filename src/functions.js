@@ -227,30 +227,31 @@ function displayProjects(arr, parentNode) {
 
 // creates tasks
 function taskCreator(task) {
+  if (task === "string" && task.trim.length > 0) {
+    // find index of project found in database
+    const projectIndex = projectsAndTasks.findIndex(
+      (e) => e.projectName === prevProject.textContent
+    );
 
-  // find index of project found in database
-  const projectIndex = projectsAndTasks.findIndex(
-    (e) => e.projectName === prevProject.textContent
-  );
-
-  // create newTask object to later push to projectsAndTasks array
-  let newTask = {
-    task: task,
-    dateCreated: new Date(),
-    dateDue: currentDate().yearMonthDay,
-    timeDue: currentDate().time,
-    priority: "High",
-    desc: "",
-  };
-  // push newly created task to correct index of projectsAndTasks in the currentTasks property
-  projectsAndTasks[projectIndex].currentTasks.push(newTask);
-  // reload the document
-  location.reload();
-  // save to localStorage to keep data after page reloads
-  return localStorage.setItem(
-    "projectsAndTasks",
-    JSON.stringify(projectsAndTasks)
-  );
+    // create newTask object to later push to projectsAndTasks array
+    let newTask = {
+      task: task,
+      dateCreated: new Date(),
+      dateDue: currentDate().yearMonthDay,
+      timeDue: currentDate().time,
+      priority: "High",
+      desc: "",
+    };
+    // push newly created task to correct index of projectsAndTasks in the currentTasks property
+    projectsAndTasks[projectIndex].currentTasks.push(newTask);
+    // reload the document
+    location.reload();
+    // save to localStorage to keep data after page reloads
+    return localStorage.setItem(
+      "projectsAndTasks",
+      JSON.stringify(projectsAndTasks)
+    );
+  }
 }
 
 // variable to select specific project

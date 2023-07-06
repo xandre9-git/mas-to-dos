@@ -231,7 +231,7 @@ function taskCreator(task) {
   const projectIndex = projectsAndTasks.findIndex(
     (e) => e.projectName === prevProject.textContent
   );
-  if (task.length > 0) {
+  if (task.trim().length > 0) {
     // create newTask object to later push to projectsAndTasks array
     let newTask = {
       task: task,

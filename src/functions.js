@@ -272,6 +272,7 @@ const taskClicked = (e) => {
   }
   if (e.target.style.textDecoration != "line-through") {
     editDetails(e.target);
+    document.querySelector("#current-tasks-container").style.display = "none";
   }
 };
 
@@ -604,6 +605,8 @@ function saveDetails(
 function cancelDetails() {
   const querySelected = document.getElementById("details-container");
   querySelected.style.display = "none";
+  document.querySelector("#current-tasks-container").style.display = "block";
+  location.reload();
 }
 
 function deleteDetails(projectIndex, taskIndex) {

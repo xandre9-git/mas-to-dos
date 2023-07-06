@@ -319,6 +319,7 @@ function displayTasks(project, arr, parentNode) {
     completeBtn.className = "task-complete-btn";
     completeBtn.type = "checkbox";
     completeBtn.title = "Complete Task";
+    completeBtn.name = "complete-button";
     // loop through completed tasks and add strikethrough and checked box to tasks that match current task iteration
     for (
       let j = 0;
